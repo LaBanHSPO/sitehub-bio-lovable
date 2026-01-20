@@ -7,6 +7,7 @@ interface ProductCardProps {
   price?: string;
   buttonText: string;
   buttonLink?: string;
+  onClick?: () => void;
 }
 
 const ProductCard = ({
@@ -16,6 +17,7 @@ const ProductCard = ({
   price,
   buttonText,
   buttonLink = "#",
+  onClick,
 }: ProductCardProps) => {
   return (
     <div className="w-full bg-card border border-border rounded-2xl p-5 flex flex-col hover:shadow-lg transition-shadow">
@@ -44,13 +46,14 @@ const ProductCard = ({
       </div>
 
       {/* CTA Button */}
-      <a href={buttonLink} target="_blank" rel="noopener noreferrer" className="block mt-4">
+      <div className="block mt-4">
         <Button 
+          onClick={onClick}
           className="w-full rounded-full bg-[hsl(170,100%,19%)] hover:bg-[hsl(170,100%,15%)] text-white font-semibold py-6 text-base"
         >
           {buttonText}
         </Button>
-      </a>
+      </div>
     </div>
   );
 };

@@ -1,6 +1,8 @@
+import { useState } from "react";
 import ProfileHeader from "./ProfileHeader";
 import CategoryBadge from "./CategoryBadge";
 import ProductCard from "./ProductCard";
+import ProductDetail from "./ProductDetail";
 
 // Demo data matching Dan Koe's store
 const profileData = {
@@ -82,14 +84,34 @@ const products = {
   ],
 };
 
+type Product = {
+  imageUrl: string;
+  title: string;
+  description: string;
+  price?: string;
+  buttonText: string;
+};
+
 const BioPage = () => {
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+
+  const handleProductClick = (product: Product) => {
+    setSelectedProduct(product);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleBack = () => {
+    setSelectedProduct(null);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <div className="min-h-screen bg-background">
       {/* Mobile Layout (stacked) / Desktop Layout (side by side) */}
       <div className="max-w-7xl mx-auto px-4 py-8 md:py-12">
         <div className="flex flex-col lg:flex-row lg:gap-12">
           {/* Left Sidebar - Profile (sticky on desktop) */}
-          <div className="lg:w-80 lg:flex-shrink-0">
+          <div className={`lg:w-80 lg:flex-shrink-0 ${selectedProduct ? "hidden lg:block" : ""}`}>
             <div className="lg:sticky lg:top-12">
               <ProfileHeader
                 name={profileData.name}
@@ -100,32 +122,48 @@ const BioPage = () => {
             </div>
           </div>
 
-          {/* Right Content - Products */}
-          <div className="flex-1 mt-10 lg:mt-0">
-            {/* Education Category */}
-            <CategoryBadge label="Education" />
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-              {products.education.map((product, index) => (
-                <ProductCard key={`education-${index}`} {...product} />
-              ))}
-            </div>
+          {/* Right Content - Products or Detail */}
+          {selectedProduct ? (
+            <ProductDetail product={selectedProduct} onBack={handleBack} />
+          ) : (
+            <div className="flex-1 mt-10 lg:mt-0">
+              {/* Education Category */}
+              <CategoryBadge label="Education" />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                {products.education.map((product, index) => (
+                  <ProductCard
+                    key={`education-${index}`}
+                    {...product}
+                    onClick={() => handleProductClick(product)}
+                  />
+                ))}
+              </div>
 
-            {/* Newsletter Category */}
-            <CategoryBadge label="Newsletter, Eden, and My Books" />
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-              {products.newsletter.map((product, index) => (
-                <ProductCard key={`newsletter-${index}`} {...product} />
-              ))}
-            </div>
+              {/* Newsletter Category */}
+              <CategoryBadge label="Newsletter, Eden, and My Books" />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                {products.newsletter.map((product, index) => (
+                  <ProductCard
+                    key={`newsletter-${index}`}
+                    {...product}
+                    onClick={() => handleProductClick(product)}
+                  />
+                ))}
+              </div>
 
-            {/* Past Challenges Category */}
-            <CategoryBadge label="Past Challenges" />
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {products.pastChallenges.map((product, index) => (
-                <ProductCard key={`challenges-${index}`} {...product} />
-              ))}
+              {/* Past Challenges Category */}
+              <CategoryBadge label="Past Challenges" />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {products.pastChallenges.map((product, index) => (
+                  <ProductCard
+                    key={`challenges-${index}`}
+                    {...product}
+                    onClick={() => handleProductClick(product)}
+                  />
+                ))}
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
         {/* Footer */}

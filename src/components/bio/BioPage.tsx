@@ -24,10 +24,10 @@ const profileData = {
 export type Product = {
   id: string;
   imageUrl: string;
-  title: string;
-  description: string;
+  titleKey: string;
+  descriptionKey: string;
   price?: string;
-  buttonText: string;
+  buttonTextKey: string;
   externalLink?: string;
   detailType?: "whiteLabel" | "personalBrand" | "digitalProducts";
 };
@@ -37,17 +37,17 @@ const products: Record<string, Product[]> = {
     {
       id: "zen-journal",
       imageUrl: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=200&h=200&fit=crop",
-      title: "Zen Journal",
-      description: "A mindful journaling app for mental wellness and personal growth.",
-      buttonText: "joinWaitlist",
+      titleKey: "zenJournalTitle",
+      descriptionKey: "zenJournalDesc",
+      buttonTextKey: "joinWaitlist",
       externalLink: "https://sagozen.digital/p/zen-journal",
     },
     {
       id: "sitehub",
       imageUrl: "https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=200&h=200&fit=crop",
-      title: "SiteHub - Premium Bio FREE Lifetime",
-      description: "Create beautiful bio link pages with our open source solution.",
-      buttonText: "freeOpenSource",
+      titleKey: "siteHubTitle",
+      descriptionKey: "siteHubDesc",
+      buttonTextKey: "freeOpenSource",
       externalLink: "https://sitehub.bio",
     },
   ],
@@ -55,17 +55,17 @@ const products: Record<string, Product[]> = {
     {
       id: "white-label-mental-health",
       imageUrl: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=200&h=200&fit=crop",
-      title: "White Label Mental Health App",
-      description: "Get a fully customized version of the Zen Journal app with your own branding!",
-      buttonText: "detail",
+      titleKey: "whiteLabelMentalTitle",
+      descriptionKey: "whiteLabelMentalDesc",
+      buttonTextKey: "detail",
       detailType: "whiteLabel",
     },
     {
       id: "white-label-pet",
       imageUrl: "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=200&h=200&fit=crop",
-      title: "White Label Pet Business Web App",
-      description: "Complete pet care management solution for your business.",
-      buttonText: "viewDemo",
+      titleKey: "whiteLabelPetTitle",
+      descriptionKey: "whiteLabelPetDesc",
+      buttonTextKey: "viewDemo",
       externalLink: "https://sagozen.digital/pet-care-pro",
     },
   ],
@@ -73,17 +73,17 @@ const products: Record<string, Product[]> = {
     {
       id: "personal-brand",
       imageUrl: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=200&h=200&fit=crop",
-      title: "Build A Profitable Personal Brand In 30 Days",
-      description: "7 Day challenge replay. Implement your personalized skill stack, minimum viable offer, and distribution system.",
-      buttonText: "watchForFree",
+      titleKey: "personalBrandCardTitle",
+      descriptionKey: "personalBrandCardDesc",
+      buttonTextKey: "watchForFree",
       detailType: "personalBrand",
     },
     {
       id: "digital-products",
       imageUrl: "https://images.unsplash.com/photo-1507925921958-8a62f3d1a50d?w=200&h=200&fit=crop",
-      title: "Your First Digital Product In 7 Days",
-      description: "Learn to create and sell 3D graphics, book covers, KDP books, and POD decorative gift items.",
-      buttonText: "watchForFree",
+      titleKey: "digitalProductCardTitle",
+      descriptionKey: "digitalProductCardDesc",
+      buttonTextKey: "watchForFree",
       detailType: "digitalProducts",
     },
   ],
@@ -153,10 +153,10 @@ const BioPage = () => {
                     <ProductCard
                       key={product.id}
                       imageUrl={product.imageUrl}
-                      title={product.title}
-                      description={product.description}
+                      title={t(product.titleKey as any)}
+                      description={t(product.descriptionKey as any)}
                       price={product.price}
-                      buttonText={t(product.buttonText as any)}
+                      buttonText={t(product.buttonTextKey as any)}
                       onClick={() => handleProductClick(product)}
                     />
                   ))}
@@ -169,10 +169,10 @@ const BioPage = () => {
                     <ProductCard
                       key={product.id}
                       imageUrl={product.imageUrl}
-                      title={product.title}
-                      description={product.description}
+                      title={t(product.titleKey as any)}
+                      description={t(product.descriptionKey as any)}
                       price={product.price}
-                      buttonText={t(product.buttonText as any)}
+                      buttonText={t(product.buttonTextKey as any)}
                       onClick={() => handleProductClick(product)}
                     />
                   ))}
@@ -185,10 +185,10 @@ const BioPage = () => {
                     <ProductCard
                       key={product.id}
                       imageUrl={product.imageUrl}
-                      title={product.title}
-                      description={product.description}
+                      title={t(product.titleKey as any)}
+                      description={t(product.descriptionKey as any)}
                       price={product.price}
-                      buttonText={t(product.buttonText as any)}
+                      buttonText={t(product.buttonTextKey as any)}
                       onClick={() => handleProductClick(product)}
                     />
                   ))}

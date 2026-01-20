@@ -7,6 +7,7 @@ import ProductCard from "./ProductCard";
 import ProductDetail from "./ProductDetail";
 import MiniProfile from "./MiniProfile";
 import { useLanguage } from "@/i18n/LanguageContext";
+import PromoFooter from "./PromoFooter";
 
 // Demo data
 const profileData = {
@@ -172,7 +173,7 @@ const BioPage = ({ productId }: BioPageProps) => {
                 transition={{ duration: 0.25 }}
                 className="lg:w-80 lg:flex-shrink-0"
               >
-                <div className="lg:sticky lg:top-12">
+                <div className="lg:sticky lg:top-12 flex flex-col">
                   <ProfileHeader
                     name={profileData.name}
                     bio={profileData.bio}
@@ -180,6 +181,10 @@ const BioPage = ({ productId }: BioPageProps) => {
                     socials={profileData.socials}
                     onToggleProfile={toggleProfile}
                   />
+                  {/* Promo - Desktop only, below profile */}
+                  <div className="hidden lg:flex justify-center mt-8">
+                    <PromoFooter />
+                  </div>
                 </div>
               </motion.div>
             )}
@@ -269,10 +274,14 @@ const BioPage = ({ productId }: BioPageProps) => {
         </div>
 
         {/* Footer */}
-        <div className="mt-16 text-center">
+        <div className="mt-16 text-center space-y-3">
           <p className="text-muted-foreground text-sm">
             {t("poweredBy")}
           </p>
+          {/* Promo - Mobile only, at bottom */}
+          <div className="lg:hidden">
+            <PromoFooter />
+          </div>
         </div>
       </div>
     </div>

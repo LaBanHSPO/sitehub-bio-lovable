@@ -1,6 +1,7 @@
-import { Instagram, Youtube, Linkedin, Link, Twitter } from "lucide-react";
+import { Instagram, Youtube, Linkedin, Link, Twitter, X } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { LanguageSelector } from "@/components/LanguageSelector";
+import { Button } from "@/components/ui/button";
 
 // TikTok icon component since Lucide doesn't have it
 const TikTokIcon = ({ className }: { className?: string }) => (
@@ -21,15 +22,29 @@ interface ProfileHeaderProps {
     linkedin?: string;
     twitter?: string;
   };
+  onToggleProfile?: () => void;
 }
 
-const ProfileHeader = ({ name, bio, avatarUrl, socials }: ProfileHeaderProps) => {
+const ProfileHeader = ({ name, bio, avatarUrl, socials, onToggleProfile }: ProfileHeaderProps) => {
   return (
     <div className="relative flex flex-col items-center text-center space-y-5">
-      {/* Settings Controls - Top Right */}
-      <div className="absolute top-0 right-0 flex items-center gap-2">
-        <ThemeToggle />
-        <LanguageSelector />
+      {/* Settings Controls - Top */}
+      <div className="w-full flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          <LanguageSelector />
+        </div>
+        {onToggleProfile && (
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={onToggleProfile}
+            className="w-9 h-9 rounded-full"
+            aria-label="Hide profile"
+          >
+            <X className="w-4 h-4" />
+          </Button>
+        )}
       </div>
 
       {/* Avatar - larger on desktop */}

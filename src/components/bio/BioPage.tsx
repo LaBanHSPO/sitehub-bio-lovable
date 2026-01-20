@@ -5,7 +5,6 @@ import ProfileHeader from "./ProfileHeader";
 import CategoryBadge from "./CategoryBadge";
 import ProductCard from "./ProductCard";
 import ProductDetail from "./ProductDetail";
-import ProfileToggle from "./ProfileToggle";
 import MiniProfile from "./MiniProfile";
 import { useLanguage } from "@/i18n/LanguageContext";
 
@@ -160,11 +159,6 @@ const BioPage = ({ productId }: BioPageProps) => {
         )}
       </AnimatePresence>
 
-      {/* Profile Toggle Button - only show on main page */}
-      {!selectedProduct && (
-        <ProfileToggle isVisible={isProfileVisible} onToggle={toggleProfile} />
-      )}
-
       {/* Mobile Layout (stacked) / Desktop Layout (side by side) */}
       <div className="max-w-7xl mx-auto px-4 py-8 md:py-12">
         <div className={`flex flex-col lg:flex-row lg:gap-12 ${!isProfileVisible && !selectedProduct ? "justify-center" : ""}`}>
@@ -184,6 +178,7 @@ const BioPage = ({ productId }: BioPageProps) => {
                     bio={profileData.bio}
                     avatarUrl={profileData.avatarUrl}
                     socials={profileData.socials}
+                    onToggleProfile={toggleProfile}
                   />
                 </div>
               </motion.div>

@@ -22,6 +22,8 @@ const profileData = {
   },
 };
 
+import type { BadgeType } from "./ProductCard";
+
 export type Product = {
   id: string;
   imageUrl: string;
@@ -31,6 +33,7 @@ export type Product = {
   buttonTextKey: string;
   externalLink?: string;
   detailType?: "whiteLabel" | "personalBrand" | "digitalProducts";
+  badge?: BadgeType;
 };
 
 const products: Record<string, Product[]> = {
@@ -42,6 +45,7 @@ const products: Record<string, Product[]> = {
       descriptionKey: "zenJournalDesc",
       buttonTextKey: "joinWaitlist",
       externalLink: "https://sagozen.digital/p/zen-journal",
+      badge: "new",
     },
     {
       id: "sitehub",
@@ -50,6 +54,7 @@ const products: Record<string, Product[]> = {
       descriptionKey: "siteHubDesc",
       buttonTextKey: "freeOpenSource",
       externalLink: "https://sitehub.bio",
+      badge: "hot",
     },
   ],
   services: [
@@ -60,6 +65,7 @@ const products: Record<string, Product[]> = {
       descriptionKey: "whiteLabelMentalDesc",
       buttonTextKey: "detail",
       detailType: "whiteLabel",
+      badge: "limited",
     },
     {
       id: "white-label-pet",
@@ -68,6 +74,7 @@ const products: Record<string, Product[]> = {
       descriptionKey: "whiteLabelPetDesc",
       buttonTextKey: "viewDemo",
       externalLink: "https://sagozen.digital/pet-care-pro",
+      badge: "new",
     },
   ],
   consulting: [
@@ -78,6 +85,7 @@ const products: Record<string, Product[]> = {
       descriptionKey: "personalBrandCardDesc",
       buttonTextKey: "watchForFree",
       detailType: "personalBrand",
+      badge: "hot",
     },
     {
       id: "digital-products",
@@ -183,6 +191,8 @@ const BioPage = ({ productId }: BioPageProps) => {
                       price={product.price}
                       buttonText={t(product.buttonTextKey as any)}
                       isExternal={!!product.externalLink}
+                      badge={product.badge}
+                      badgeText={product.badge ? t(`badge${product.badge.charAt(0).toUpperCase() + product.badge.slice(1)}` as any) : undefined}
                       onClick={() => handleProductClick(product)}
                     />
                   ))}
@@ -200,6 +210,8 @@ const BioPage = ({ productId }: BioPageProps) => {
                       price={product.price}
                       buttonText={t(product.buttonTextKey as any)}
                       isExternal={!!product.externalLink}
+                      badge={product.badge}
+                      badgeText={product.badge ? t(`badge${product.badge.charAt(0).toUpperCase() + product.badge.slice(1)}` as any) : undefined}
                       onClick={() => handleProductClick(product)}
                     />
                   ))}
@@ -217,6 +229,8 @@ const BioPage = ({ productId }: BioPageProps) => {
                       price={product.price}
                       buttonText={t(product.buttonTextKey as any)}
                       isExternal={!!product.externalLink}
+                      badge={product.badge}
+                      badgeText={product.badge ? t(`badge${product.badge.charAt(0).toUpperCase() + product.badge.slice(1)}` as any) : undefined}
                       onClick={() => handleProductClick(product)}
                     />
                   ))}

@@ -1,25 +1,32 @@
-import { ArrowLeft } from "lucide-react";
-
+import { ArrowLeft, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Separator } from "@/components/ui/separator";
 import { useLanguage } from "@/i18n/LanguageContext";
+import type { Product } from "./BioPage";
 
 interface ProductDetailProps {
-  product: {
-    imageUrl: string;
-    title: string;
-    description: string;
-    price?: string;
-    buttonText: string;
-  };
+  product: Product;
   onBack: () => void;
 }
 
 const ProductDetail = ({ product, onBack }: ProductDetailProps) => {
   const { t } = useLanguage();
-  
+
+  // Render content based on detail type
+  const renderContent = () => {
+    switch (product.detailType) {
+      case "whiteLabel":
+        return <WhiteLabelContent />;
+      case "personalBrand":
+        return <PersonalBrandContent />;
+      case "digitalProducts":
+        return <DigitalProductsContent />;
+      default:
+        return <DefaultContent product={product} />;
+    }
+  };
+
   return (
     <div className="flex-1">
       {/* Hero Image with Back Button */}
@@ -37,7 +44,7 @@ const ProductDetail = ({ product, onBack }: ProductDetailProps) => {
           <img
             src={product.imageUrl}
             alt={product.title}
-            className="max-h-full max-w-[60%] object-contain"
+            className="max-h-full max-w-[60%] object-contain rounded-lg"
           />
         </div>
 
@@ -49,163 +56,195 @@ const ProductDetail = ({ product, onBack }: ProductDetailProps) => {
         </div>
       </div>
 
-      {/* Price */}
-      {product.price && (
-        <p className="text-[hsl(170,100%,19%)] font-bold text-2xl md:text-3xl mb-6">
-          {product.price}
-        </p>
-      )}
+      {renderContent()}
 
-      {/* Testimonial Quote */}
-      <div className="border-l-4 border-muted pl-4 mb-6">
-        <p className="text-muted-foreground italic text-sm md:text-base leading-relaxed">
-          {t("testimonial")}{" "}
-          <span className="font-semibold text-foreground not-italic">
-            {t("testimonialAuthor")}
-          </span>
-        </p>
+      {/* Footer spacing */}
+      <div className="h-10" />
+    </div>
+  );
+};
+
+// White Label Mental Health App Content
+const WhiteLabelContent = () => {
+  const { t } = useLanguage();
+
+  return (
+    <div className="space-y-6">
+      {/* Feature Image */}
+      <div className="w-full rounded-xl overflow-hidden bg-muted">
+        <img
+          src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=400&fit=crop"
+          alt="White Label App Preview"
+          className="w-full h-auto object-cover"
+        />
       </div>
 
-      <Separator className="my-6" />
-
-      {/* Content Section */}
+      {/* Description */}
       <div className="space-y-4 text-foreground">
-        <p>{t("statsIntro")}</p>
-        <p className="font-semibold">{t("stat1")}</p>
-        <p className="font-semibold">{t("stat2")}</p>
-        <p className="font-semibold">{t("stat3")}</p>
-        <p className="text-muted-foreground">{t("statsNote1")}</p>
-        <p className="text-muted-foreground">{t("statsNote2")}</p>
-        <p className="text-muted-foreground">{t("statsNote3")}</p>
-      </div>
-
-      <Separator className="my-6" />
-
-      {/* Enrollment Section */}
-      <div className="space-y-4">
-        <p className="font-medium">{t("enrollBelow")}</p>
-        <p className="text-muted-foreground">
-          {t("addMentalMonetization")}
-        </p>
-        <p className="italic text-muted-foreground">
-          {t("mentalMonetizationNote")}
-        </p>
-        <p className="text-muted-foreground">{t("discountNote")}</p>
-      </div>
-
-      {/* One Time Offer Box */}
-      <div className="mt-8 border-2 border-dashed border-[hsl(170,100%,19%)] rounded-lg p-4 md:p-6">
-        <div className="text-center space-y-2">
-          <p className="text-destructive font-bold uppercase tracking-wide text-sm">
-            {t("oneTimeOffer")}
-          </p>
-          <p className="text-sm text-muted-foreground">
-            {t("addCourse")}(
-            <span className="line-through">{t("originalValue")}</span>)
-          </p>
-          <Button className="w-full bg-[hsl(170,100%,19%)] hover:bg-[hsl(170,100%,15%)] text-primary-foreground rounded-md py-5">
-            <span className="mr-2">→</span>
-            <Checkbox className="mr-2 border-primary-foreground data-[state=checked]:bg-primary-foreground data-[state=checked]:text-[hsl(170,100%,19%)]" />
-            {t("yesOffer")}
-          </Button>
+        <p className="text-lg font-medium">{t("whiteLabelDescription")}</p>
+        <Separator />
+        <p>{t("whiteLabelFeatures")}</p>
+        <p>{t("whiteLabelPerfect")}</p>
+        <Separator />
+        <div className="space-y-2 text-muted-foreground">
+          <p className="font-medium text-foreground">{t("whiteLabelTech")}</p>
+          <p>{t("whiteLabelDelivery")}</p>
         </div>
       </div>
 
-      {/* Join Section */}
-      <div className="mt-10 space-y-6">
-        <h2 className="text-[hsl(170,100%,19%)] text-xl md:text-2xl font-semibold text-center">
-          {t("joinStudents")}
-        </h2>
+      {/* Contact Section */}
+      <div className="mt-8 p-6 border border-border rounded-xl bg-muted/30">
+        <div className="flex items-center gap-3 mb-4">
+          <Mail className="w-5 h-5 text-[hsl(170,100%,19%)]" />
+          <span className="font-medium">{t("whiteLabelContact")}</span>
+        </div>
+        <Button
+          className="w-full bg-[hsl(170,100%,19%)] hover:bg-[hsl(170,100%,15%)] text-white rounded-full py-6"
+          onClick={() => window.open("mailto:hello@sagozen.digital", "_blank")}
+        >
+          {t("contactUs")}
+        </Button>
+      </div>
+    </div>
+  );
+};
 
-        {/* Form */}
-        <div className="space-y-4">
+// Personal Brand Challenge Content
+const PersonalBrandContent = () => {
+  const { t } = useLanguage();
+
+  return (
+    <div className="space-y-6">
+      {/* Stats Section */}
+      <div className="space-y-4 text-foreground">
+        <p className="font-medium">{t("statsIntro")}</p>
+        <ul className="space-y-3">
+          <li className="flex items-start gap-2">
+            <span className="text-[hsl(170,100%,19%)] font-bold">•</span>
+            <span>{t("stat1")}</span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="text-[hsl(170,100%,19%)] font-bold">•</span>
+            <span>{t("stat2")}</span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="text-[hsl(170,100%,19%)] font-bold">•</span>
+            <span>{t("stat3")}</span>
+          </li>
+        </ul>
+      </div>
+
+      <Separator />
+
+      {/* What You'll Learn */}
+      <div className="space-y-4">
+        <p className="font-medium text-foreground">{t("personalBrandIntro")}</p>
+        <ul className="space-y-3 text-muted-foreground">
+          <li className="flex items-start gap-2">
+            <span className="text-[hsl(170,100%,19%)]">✓</span>
+            <span>{t("personalBrand1")}</span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="text-[hsl(170,100%,19%)]">✓</span>
+            <span>{t("personalBrand2")}</span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="text-[hsl(170,100%,19%)]">✓</span>
+            <span>{t("personalBrand3")}</span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="text-[hsl(170,100%,19%)]">✓</span>
+            <span>{t("personalBrand4")}</span>
+          </li>
+        </ul>
+      </div>
+
+      {/* Contact Form */}
+      <div className="mt-8 space-y-4">
+        <p className="font-medium">{t("enrollBelow")}</p>
+        <div className="space-y-3">
           <Input
             placeholder={t("enterName")}
-            className="bg-muted/50 border-border py-6 text-base"
+            className="bg-muted/50 border-border py-6"
           />
           <Input
             placeholder={t("enterEmail")}
             type="email"
-            className="bg-muted/50 border-border py-6 text-base"
+            className="bg-muted/50 border-border py-6"
           />
+          <Button className="w-full bg-[hsl(170,100%,19%)] hover:bg-[hsl(170,100%,15%)] text-white rounded-full py-6">
+            {t("getInTouch")}
+          </Button>
         </div>
+      </div>
+    </div>
+  );
+};
 
-        {/* Total Price */}
-        <div className="flex items-center justify-between py-2">
-          <span className="font-medium">{t("total")} :</span>
-          <div className="flex-1 border-b border-dashed border-muted-foreground mx-4" />
-          <span className="text-[hsl(170,100%,19%)] font-bold text-xl">
-            US{product.price || "$150"}
-          </span>
-        </div>
+// Digital Products Content
+const DigitalProductsContent = () => {
+  const { t } = useLanguage();
 
-        {/* Payment Methods */}
-        <div className="grid grid-cols-3 gap-3">
-          <div className="border border-[hsl(170,100%,19%)] rounded-lg p-3 text-center">
-            <div className="w-5 h-5 mx-auto mb-1 text-[hsl(170,100%,19%)]">💳</div>
-            <span className="text-sm text-[hsl(170,100%,19%)]">{t("card")}</span>
-          </div>
-          <div className="border border-border rounded-lg p-3 text-center">
-            <div className="w-5 h-5 mx-auto mb-1">🏦</div>
-            <span className="text-sm text-muted-foreground">{t("bank")}</span>
-          </div>
-          <div className="border border-border rounded-lg p-3 text-center">
-            <div className="w-5 h-5 mx-auto mb-1">G</div>
-            <span className="text-sm text-muted-foreground">Google Pay</span>
-          </div>
-        </div>
+  return (
+    <div className="space-y-6">
+      {/* Description */}
+      <p className="text-lg text-foreground">{t("digitalProductsDescription")}</p>
 
-        {/* Secure Checkout */}
-        <div className="flex items-center gap-2 text-[hsl(170,100%,19%)] text-sm">
-          <span>🔒</span>
-          <span>{t("secureCheckout")}</span>
-          <span>∨</span>
-        </div>
+      <Separator />
 
-        {/* Card Details */}
-        <div className="space-y-4">
-          <div>
-            <label className="text-sm text-muted-foreground mb-1 block">
-              {t("cardNumber")}
-            </label>
-            <Input
-              placeholder="1234 1234 1234 1234"
-              className="bg-background border-border"
-            />
+      {/* What's Included */}
+      <div className="space-y-4">
+        <p className="font-medium text-foreground">{t("digitalProductsIntro")}</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="p-4 rounded-xl bg-muted/50 border border-border">
+            <span className="text-2xl mb-2 block">🎨</span>
+            <p className="font-medium">{t("digitalProduct1")}</p>
           </div>
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="text-sm text-muted-foreground mb-1 block">
-                {t("expirationDate")}
-              </label>
-              <Input placeholder="MM / YY" className="bg-background border-border" />
-            </div>
-            <div>
-              <label className="text-sm text-muted-foreground mb-1 block">
-                {t("securityCode")}
-              </label>
-              <Input placeholder="CVC" className="bg-background border-border" />
-            </div>
+          <div className="p-4 rounded-xl bg-muted/50 border border-border">
+            <span className="text-2xl mb-2 block">📚</span>
+            <p className="font-medium">{t("digitalProduct2")}</p>
           </div>
-          <div>
-            <label className="text-sm text-muted-foreground mb-1 block">
-              {t("country")}
-            </label>
-            <Input
-              placeholder={t("selectCountry")}
-              className="bg-background border-border"
-            />
+          <div className="p-4 rounded-xl bg-muted/50 border border-border">
+            <span className="text-2xl mb-2 block">📖</span>
+            <p className="font-medium">{t("digitalProduct3")}</p>
+          </div>
+          <div className="p-4 rounded-xl bg-muted/50 border border-border">
+            <span className="text-2xl mb-2 block">🎁</span>
+            <p className="font-medium">{t("digitalProduct4")}</p>
           </div>
         </div>
-
-        {/* Enroll Button */}
-        <Button className="w-full bg-[hsl(170,100%,19%)] hover:bg-[hsl(170,100%,15%)] text-primary-foreground rounded-lg py-6 text-lg font-semibold">
-          {t("enrollNow")}
-        </Button>
       </div>
 
-      {/* Footer spacing */}
-      <div className="h-10" />
+      {/* Contact Form */}
+      <div className="mt-8 space-y-4">
+        <p className="font-medium">{t("enrollBelow")}</p>
+        <div className="space-y-3">
+          <Input
+            placeholder={t("enterName")}
+            className="bg-muted/50 border-border py-6"
+          />
+          <Input
+            placeholder={t("enterEmail")}
+            type="email"
+            className="bg-muted/50 border-border py-6"
+          />
+          <Button className="w-full bg-[hsl(170,100%,19%)] hover:bg-[hsl(170,100%,15%)] text-white rounded-full py-6">
+            {t("getInTouch")}
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Default fallback content
+const DefaultContent = ({ product }: { product: Product }) => {
+  return (
+    <div className="space-y-4">
+      <p className="text-foreground">{product.description}</p>
+      {product.price && (
+        <p className="text-[hsl(170,100%,19%)] font-bold text-2xl">{product.price}</p>
+      )}
     </div>
   );
 };

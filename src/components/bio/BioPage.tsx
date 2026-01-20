@@ -127,10 +127,10 @@ const BioPage = () => {
             {selectedProduct ? (
               <motion.div
                 key="detail"
-                initial={{ opacity: 0, x: 100 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -100 }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
                 className="flex-1"
               >
                 <ProductDetail product={selectedProduct} onBack={handleBack} />
@@ -138,27 +138,21 @@ const BioPage = () => {
             ) : (
               <motion.div
                 key="list"
-                initial={{ opacity: 0, x: -100 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 100 }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
                 className="flex-1 mt-10 lg:mt-0"
               >
                 {/* Education Category */}
                 <CategoryBadge label="Education" />
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                   {products.education.map((product, index) => (
-                    <motion.div
+                    <ProductCard
                       key={`education-${index}`}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.1 }}
-                    >
-                      <ProductCard
-                        {...product}
-                        onClick={() => handleProductClick(product)}
-                      />
-                    </motion.div>
+                      {...product}
+                      onClick={() => handleProductClick(product)}
+                    />
                   ))}
                 </div>
 
@@ -166,17 +160,11 @@ const BioPage = () => {
                 <CategoryBadge label="Newsletter, Eden, and My Books" />
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                   {products.newsletter.map((product, index) => (
-                    <motion.div
+                    <ProductCard
                       key={`newsletter-${index}`}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: (index + 2) * 0.1 }}
-                    >
-                      <ProductCard
-                        {...product}
-                        onClick={() => handleProductClick(product)}
-                      />
-                    </motion.div>
+                      {...product}
+                      onClick={() => handleProductClick(product)}
+                    />
                   ))}
                 </div>
 
@@ -184,17 +172,11 @@ const BioPage = () => {
                 <CategoryBadge label="Past Challenges" />
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {products.pastChallenges.map((product, index) => (
-                    <motion.div
+                    <ProductCard
                       key={`challenges-${index}`}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: (index + 7) * 0.1 }}
-                    >
-                      <ProductCard
-                        {...product}
-                        onClick={() => handleProductClick(product)}
-                      />
-                    </motion.div>
+                      {...product}
+                      onClick={() => handleProductClick(product)}
+                    />
                   ))}
                 </div>
               </motion.div>

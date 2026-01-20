@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { ExternalLink, Flame, Sparkles, Clock } from "lucide-react";
 
 export type BadgeType = "new" | "hot" | "limited";
@@ -16,18 +15,18 @@ interface ProductCardProps {
   onClick?: () => void;
 }
 
-const badgeConfig: Record<BadgeType, { icon: React.ReactNode; className: string }> = {
+const badgeConfig: Record<BadgeType, { icon: React.ReactNode; bgColor: string }> = {
   new: {
     icon: <Sparkles className="w-3 h-3" />,
-    className: "bg-blue-500 hover:bg-blue-500 text-white border-0",
+    bgColor: "bg-blue-500",
   },
   hot: {
     icon: <Flame className="w-3 h-3" />,
-    className: "bg-orange-500 hover:bg-orange-500 text-white border-0",
+    bgColor: "bg-orange-500",
   },
   limited: {
     icon: <Clock className="w-3 h-3" />,
-    className: "bg-purple-500 hover:bg-purple-500 text-white border-0",
+    bgColor: "bg-purple-500",
   },
 };
 
@@ -43,15 +42,19 @@ const ProductCard = ({
   onClick,
 }: ProductCardProps) => {
   return (
-    <div className="relative w-full bg-card border border-border rounded-2xl p-5 flex flex-col hover:shadow-lg transition-shadow">
-      {/* Badge */}
+    <div className="relative w-full bg-card border border-border rounded-2xl p-5 flex flex-col hover:shadow-lg transition-shadow overflow-hidden">
+      {/* Corner Badge */}
       {badge && badgeText && (
-        <Badge 
-          className={`absolute -top-2 -right-2 flex items-center gap-1 px-2 py-1 text-xs font-semibold ${badgeConfig[badge].className}`}
+        <div 
+          className={`absolute -top-1 -right-1 ${badgeConfig[badge].bgColor} text-white text-[10px] font-bold uppercase tracking-wide px-3 py-1 flex items-center gap-1 shadow-md`}
+          style={{
+            clipPath: "polygon(0 0, 100% 0, 100% 100%, 8px 100%)",
+            paddingLeft: "12px",
+          }}
         >
           {badgeConfig[badge].icon}
-          {badgeText}
-        </Badge>
+          <span>{badgeText}</span>
+        </div>
       )}
 
       <div className="flex gap-4 flex-1">

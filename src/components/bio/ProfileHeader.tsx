@@ -27,25 +27,29 @@ interface ProfileHeaderProps {
 
 const ProfileHeader = ({ name, bio, avatarUrl, socials, onToggleProfile }: ProfileHeaderProps) => {
   return (
-    <div className="relative flex flex-col items-center text-center space-y-5">
-      {/* Settings Controls - Top */}
-      <div className="w-full flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <ThemeToggle />
-          <LanguageSelector />
-        </div>
+    <div className="relative">
+      {/* Profile Container with subtle border */}
+      <div className="relative border border-border/30 rounded-2xl p-6 pt-4">
+        {/* Close Button - positioned at top right corner of border */}
         {onToggleProfile && (
           <Button
             variant="ghost"
             size="icon"
             onClick={onToggleProfile}
-            className="w-9 h-9 rounded-full border border-border/50"
+            className="absolute -top-3 -right-3 w-7 h-7 rounded-full bg-background border border-border/50 hover:border-border hover:bg-muted"
             aria-label="Hide profile"
           >
-            <X className="w-4 h-4" />
+            <X className="w-3.5 h-3.5" />
           </Button>
         )}
-      </div>
+
+        {/* Settings Controls - Top Left inside container */}
+        <div className="flex items-center gap-2 mb-5">
+          <ThemeToggle />
+          <LanguageSelector />
+        </div>
+
+        <div className="flex flex-col items-center text-center space-y-5">
 
       {/* Avatar - larger on desktop */}
       <div className="w-32 h-32 md:w-44 md:h-44 lg:w-52 lg:h-52 rounded-full overflow-hidden ring-2 ring-border shadow-lg">
@@ -129,6 +133,8 @@ const ProfileHeader = ({ name, bio, avatarUrl, socials, onToggleProfile }: Profi
           )}
         </div>
       )}
+        </div>
+      </div>
     </div>
   );
 };

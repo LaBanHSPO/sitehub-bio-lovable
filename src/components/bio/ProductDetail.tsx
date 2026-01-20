@@ -43,7 +43,7 @@ const ProductDetail = ({ product, onBack }: ProductDetailProps) => {
         <div className="w-full aspect-[16/9] md:aspect-[2/1] flex items-center justify-center p-8">
           <img
             src={product.imageUrl}
-            alt={product.title}
+            alt={t(product.titleKey as any)}
             className="max-h-full max-w-[60%] object-contain rounded-lg"
           />
         </div>
@@ -51,7 +51,7 @@ const ProductDetail = ({ product, onBack }: ProductDetailProps) => {
         {/* Product Title on Image */}
         <div className="px-6 pb-6">
           <h1 className="text-xl md:text-2xl font-semibold text-background">
-            {product.title}
+            {t(product.titleKey as any)}
           </h1>
         </div>
       </div>
@@ -239,9 +239,11 @@ const DigitalProductsContent = () => {
 
 // Default fallback content
 const DefaultContent = ({ product }: { product: Product }) => {
+  const { t } = useLanguage();
+  
   return (
     <div className="space-y-4">
-      <p className="text-foreground">{product.description}</p>
+      <p className="text-foreground">{t(product.descriptionKey as any)}</p>
       {product.price && (
         <p className="text-[hsl(170,100%,19%)] font-bold text-2xl">{product.price}</p>
       )}

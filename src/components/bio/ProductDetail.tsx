@@ -1,8 +1,10 @@
-import { ArrowLeft, Mail } from "lucide-react";
+import { ArrowLeft, Mail, Share2, Check } from "lucide-react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { toast } from "sonner";
 import type { Product } from "./BioPage";
 
 interface ProductDetailProps {
@@ -12,6 +14,19 @@ interface ProductDetailProps {
 
 const ProductDetail = ({ product, onBack }: ProductDetailProps) => {
   const { t } = useLanguage();
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyLink = async () => {
+    const url = window.location.href;
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+      toast.success(t("linkCopied"));
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      toast.error("Failed to copy link");
+    }
+  };
 
   // Render content based on detail type
   const renderContent = () => {
@@ -37,6 +52,18 @@ const ProductDetail = ({ product, onBack }: ProductDetailProps) => {
           className="absolute top-4 left-4 z-10 w-10 h-10 rounded-full bg-background flex items-center justify-center hover:bg-muted transition-colors"
         >
           <ArrowLeft className="w-5 h-5 text-foreground" />
+        </button>
+
+        {/* Share Button */}
+        <button
+          onClick={handleCopyLink}
+          className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-background flex items-center justify-center hover:bg-muted transition-colors"
+        >
+          {copied ? (
+            <Check className="w-5 h-5 text-[hsl(170,100%,19%)]" />
+          ) : (
+            <Share2 className="w-5 h-5 text-foreground" />
+          )}
         </button>
 
         {/* Product Hero Image */}

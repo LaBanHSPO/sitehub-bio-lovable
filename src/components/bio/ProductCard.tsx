@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { ExternalLink } from "lucide-react";
 
 interface ProductCardProps {
   imageUrl: string;
@@ -6,7 +7,7 @@ interface ProductCardProps {
   description: string;
   price?: string;
   buttonText: string;
-  buttonLink?: string;
+  isExternal?: boolean;
   onClick?: () => void;
 }
 
@@ -16,7 +17,7 @@ const ProductCard = ({
   description,
   price,
   buttonText,
-  buttonLink = "#",
+  isExternal = false,
   onClick,
 }: ProductCardProps) => {
   return (
@@ -49,9 +50,14 @@ const ProductCard = ({
       <div className="block mt-4">
         <Button 
           onClick={onClick}
-          className="w-full rounded-full bg-[hsl(170,100%,19%)] hover:bg-[hsl(170,100%,15%)] text-white font-semibold py-6 text-base"
+          className={`w-full rounded-full font-semibold py-6 text-base flex items-center justify-center gap-2 ${
+            isExternal 
+              ? "bg-transparent border-2 border-[hsl(170,100%,19%)] text-[hsl(170,100%,19%)] hover:bg-[hsl(170,100%,19%)]/10" 
+              : "bg-[hsl(170,100%,19%)] hover:bg-[hsl(170,100%,15%)] text-white"
+          }`}
         >
           {buttonText}
+          {isExternal && <ExternalLink className="w-4 h-4" />}
         </Button>
       </div>
     </div>

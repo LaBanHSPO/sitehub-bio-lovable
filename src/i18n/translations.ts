@@ -64,6 +64,7 @@ export const translations = {
     contactUs: "Contact Us",
     enterName: "Enter your name",
     enterEmail: "Enter your email",
+    linkCopied: "Link copied to clipboard!",
   },
   
   fr: {
@@ -131,6 +132,7 @@ export const translations = {
     contactUs: "Contactez-nous",
     enterName: "Entrez votre nom",
     enterEmail: "Entrez votre email",
+    linkCopied: "Lien copié dans le presse-papiers!",
   },
   
   de: {
@@ -198,6 +200,7 @@ export const translations = {
     contactUs: "Kontaktieren Sie uns",
     enterName: "Geben Sie Ihren Namen ein",
     enterEmail: "Geben Sie Ihre E-Mail ein",
+    linkCopied: "Link in die Zwischenablage kopiert!",
   },
   
   ja: {
@@ -265,6 +268,7 @@ export const translations = {
     contactUs: "ご連絡ください",
     enterName: "お名前を入力",
     enterEmail: "メールアドレスを入力",
+    linkCopied: "リンクをクリップボードにコピーしました！",
   },
   
   ko: {
@@ -332,6 +336,7 @@ export const translations = {
     contactUs: "문의하기",
     enterName: "이름을 입력하세요",
     enterEmail: "이메일을 입력하세요",
+    linkCopied: "링크가 클립보드에 복사되었습니다!",
   },
 } as const;
 

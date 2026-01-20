@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import ProfileHeader from "./ProfileHeader";
 import CategoryBadge from "./CategoryBadge";
@@ -89,22 +90,46 @@ const products: Record<string, Product[]> = {
   ],
 };
 
-const BioPage = () => {
-  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+// Helper to find product by ID
+const findProductById = (id: string): Product | undefined => {
+  for (const category of Object.values(products)) {
+    const found = category.find(p => p.id === id);
+    if (found) return found;
+  }
+  return undefined;
+};
+
+// Export for use in routing
+export { products, findProductById, profileData };
+
+interface BioPageProps {
+  productId?: string;
+}
+
+const BioPage = ({ productId }: BioPageProps) => {
+  const navigate = useNavigate();
   const { t } = useLanguage();
+  
+  // Find selected product from URL parameter
+  const selectedProduct = productId ? findProductById(productId) : null;
+
+  // Scroll to top when product changes
+  useEffect(() => {
+    if (selectedProduct) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [selectedProduct]);
 
   const handleProductClick = (product: Product) => {
     if (product.externalLink) {
       window.open(product.externalLink, "_blank");
     } else if (product.detailType) {
-      setSelectedProduct(product);
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      navigate(`/p/${product.id}`);
     }
   };
 
   const handleBack = () => {
-    setSelectedProduct(null);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    navigate("/");
   };
 
   return (
@@ -157,6 +182,7 @@ const BioPage = () => {
                       description={t(product.descriptionKey as any)}
                       price={product.price}
                       buttonText={t(product.buttonTextKey as any)}
+                      isExternal={!!product.externalLink}
                       onClick={() => handleProductClick(product)}
                     />
                   ))}
@@ -173,6 +199,7 @@ const BioPage = () => {
                       description={t(product.descriptionKey as any)}
                       price={product.price}
                       buttonText={t(product.buttonTextKey as any)}
+                      isExternal={!!product.externalLink}
                       onClick={() => handleProductClick(product)}
                     />
                   ))}
@@ -189,6 +216,7 @@ const BioPage = () => {
                       description={t(product.descriptionKey as any)}
                       price={product.price}
                       buttonText={t(product.buttonTextKey as any)}
+                      isExternal={!!product.externalLink}
                       onClick={() => handleProductClick(product)}
                     />
                   ))}

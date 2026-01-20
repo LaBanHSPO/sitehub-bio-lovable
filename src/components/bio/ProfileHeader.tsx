@@ -25,7 +25,13 @@ interface ProfileHeaderProps {
 
 const ProfileHeader = ({ name, bio, avatarUrl, socials }: ProfileHeaderProps) => {
   return (
-    <div className="flex flex-col items-center text-center space-y-5">
+    <div className="relative flex flex-col items-center text-center space-y-5">
+      {/* Settings Controls - Top Right */}
+      <div className="absolute top-0 right-0 flex items-center gap-2">
+        <ThemeToggle />
+        <LanguageSelector />
+      </div>
+
       {/* Avatar - larger on desktop */}
       <div className="w-32 h-32 md:w-44 md:h-44 lg:w-52 lg:h-52 rounded-full overflow-hidden ring-2 ring-border shadow-lg">
         <img
@@ -106,8 +112,6 @@ const ProfileHeader = ({ name, bio, avatarUrl, socials }: ProfileHeaderProps) =>
               <Twitter className="w-4 h-4" />
             </a>
           )}
-          <ThemeToggle />
-          <LanguageSelector />
         </div>
       )}
     </div>

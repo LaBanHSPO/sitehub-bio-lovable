@@ -39,7 +39,7 @@ const ProfileHeader = ({ name, bio, avatarUrl, socials, onToggleProfile }: Profi
             variant="ghost"
             size="icon"
             onClick={onToggleProfile}
-            className="w-9 h-9 rounded-full"
+            className="w-9 h-9 rounded-full border border-border/50"
             aria-label="Hide profile"
           >
             <X className="w-4 h-4" />

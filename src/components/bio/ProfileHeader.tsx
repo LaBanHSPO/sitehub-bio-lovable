@@ -1,4 +1,5 @@
 import { Instagram, Youtube, Linkedin, Link, Twitter } from "lucide-react";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 // TikTok icon component since Lucide doesn't have it
 const TikTokIcon = ({ className }: { className?: string }) => (
@@ -104,6 +105,7 @@ const ProfileHeader = ({ name, bio, avatarUrl, socials }: ProfileHeaderProps) =>
               <Twitter className="w-4 h-4" />
             </a>
           )}
+          <ThemeToggle />
         </div>
       )}
     </div>

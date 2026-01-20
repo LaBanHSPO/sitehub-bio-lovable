@@ -1,10 +1,12 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import ProfileHeader from "./ProfileHeader";
 import CategoryBadge from "./CategoryBadge";
 import ProductCard from "./ProductCard";
 import ProductDetail from "./ProductDetail";
+import ProfileToggle from "./ProfileToggle";
+import MiniProfile from "./MiniProfile";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 // Demo data
@@ -117,6 +119,7 @@ interface BioPageProps {
 const BioPage = ({ productId }: BioPageProps) => {
   const navigate = useNavigate();
   const { t } = useLanguage();
+  const [isProfileVisible, setIsProfileVisible] = useState(true);
   
   // Find selected product from URL parameter
   const selectedProduct = productId ? findProductById(productId) : null;
@@ -140,22 +143,52 @@ const BioPage = ({ productId }: BioPageProps) => {
     navigate("/");
   };
 
+  const toggleProfile = () => {
+    setIsProfileVisible(!isProfileVisible);
+  };
+
   return (
     <div className="min-h-screen bg-background">
+      {/* Mini Profile - shown when profile is hidden */}
+      <AnimatePresence>
+        {!isProfileVisible && !selectedProduct && (
+          <MiniProfile
+            name={profileData.name}
+            avatarUrl={profileData.avatarUrl}
+            onClick={toggleProfile}
+          />
+        )}
+      </AnimatePresence>
+
+      {/* Profile Toggle Button - only show on main page */}
+      {!selectedProduct && (
+        <ProfileToggle isVisible={isProfileVisible} onToggle={toggleProfile} />
+      )}
+
       {/* Mobile Layout (stacked) / Desktop Layout (side by side) */}
       <div className="max-w-7xl mx-auto px-4 py-8 md:py-12">
-        <div className="flex flex-col lg:flex-row lg:gap-12">
+        <div className={`flex flex-col lg:flex-row lg:gap-12 ${!isProfileVisible && !selectedProduct ? "justify-center" : ""}`}>
           {/* Left Sidebar - Profile (sticky on desktop) */}
-          <div className={`lg:w-80 lg:flex-shrink-0 ${selectedProduct ? "hidden lg:block" : ""}`}>
-            <div className="lg:sticky lg:top-12">
-              <ProfileHeader
-                name={profileData.name}
-                bio={profileData.bio}
-                avatarUrl={profileData.avatarUrl}
-                socials={profileData.socials}
-              />
-            </div>
-          </div>
+          <AnimatePresence>
+            {isProfileVisible && !selectedProduct && (
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.25 }}
+                className="lg:w-80 lg:flex-shrink-0"
+              >
+                <div className="lg:sticky lg:top-12">
+                  <ProfileHeader
+                    name={profileData.name}
+                    bio={profileData.bio}
+                    avatarUrl={profileData.avatarUrl}
+                    socials={profileData.socials}
+                  />
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* Right Content - Products or Detail */}
           <AnimatePresence mode="wait">
@@ -177,7 +210,7 @@ const BioPage = ({ productId }: BioPageProps) => {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }}
-                className="flex-1 mt-10 lg:mt-0"
+                className={`flex-1 mt-10 lg:mt-0 ${!isProfileVisible ? "max-w-4xl mx-auto" : ""}`}
               >
                 {/* Products Category */}
                 <CategoryBadge label={t("products")} />

@@ -4,11 +4,17 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { LanguageProvider } from "@/i18n/LanguageContext";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
+import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
+import BioPage from "./components/bio/BioPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
+
+// Wrapper component to handle product detail routing
+const ProductDetailPage = () => {
+  const { productId } = useParams<{ productId: string }>();
+  return <BioPage productId={productId} />;
+};
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -19,7 +25,8 @@ const App = () => (
           <Sonner />
           <BrowserRouter>
             <Routes>
-              <Route path="/" element={<Index />} />
+              <Route path="/" element={<BioPage />} />
+              <Route path="/p/:productId" element={<ProductDetailPage />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>

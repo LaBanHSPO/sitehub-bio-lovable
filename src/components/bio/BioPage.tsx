@@ -1,9 +1,9 @@
 import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import ProfileHeader from "./ProfileHeader";
 import CategoryBadge from "./CategoryBadge";
 import ProductCard from "./ProductCard";
 import ProductDetail from "./ProductDetail";
-
 // Demo data matching Dan Koe's store
 const profileData = {
   name: "Dan Koe",
@@ -123,47 +123,83 @@ const BioPage = () => {
           </div>
 
           {/* Right Content - Products or Detail */}
-          {selectedProduct ? (
-            <ProductDetail product={selectedProduct} onBack={handleBack} />
-          ) : (
-            <div className="flex-1 mt-10 lg:mt-0">
-              {/* Education Category */}
-              <CategoryBadge label="Education" />
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                {products.education.map((product, index) => (
-                  <ProductCard
-                    key={`education-${index}`}
-                    {...product}
-                    onClick={() => handleProductClick(product)}
-                  />
-                ))}
-              </div>
+          <AnimatePresence mode="wait">
+            {selectedProduct ? (
+              <motion.div
+                key="detail"
+                initial={{ opacity: 0, x: 100 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -100 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                className="flex-1"
+              >
+                <ProductDetail product={selectedProduct} onBack={handleBack} />
+              </motion.div>
+            ) : (
+              <motion.div
+                key="list"
+                initial={{ opacity: 0, x: -100 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 100 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                className="flex-1 mt-10 lg:mt-0"
+              >
+                {/* Education Category */}
+                <CategoryBadge label="Education" />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                  {products.education.map((product, index) => (
+                    <motion.div
+                      key={`education-${index}`}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                    >
+                      <ProductCard
+                        {...product}
+                        onClick={() => handleProductClick(product)}
+                      />
+                    </motion.div>
+                  ))}
+                </div>
 
-              {/* Newsletter Category */}
-              <CategoryBadge label="Newsletter, Eden, and My Books" />
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                {products.newsletter.map((product, index) => (
-                  <ProductCard
-                    key={`newsletter-${index}`}
-                    {...product}
-                    onClick={() => handleProductClick(product)}
-                  />
-                ))}
-              </div>
+                {/* Newsletter Category */}
+                <CategoryBadge label="Newsletter, Eden, and My Books" />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                  {products.newsletter.map((product, index) => (
+                    <motion.div
+                      key={`newsletter-${index}`}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: (index + 2) * 0.1 }}
+                    >
+                      <ProductCard
+                        {...product}
+                        onClick={() => handleProductClick(product)}
+                      />
+                    </motion.div>
+                  ))}
+                </div>
 
-              {/* Past Challenges Category */}
-              <CategoryBadge label="Past Challenges" />
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {products.pastChallenges.map((product, index) => (
-                  <ProductCard
-                    key={`challenges-${index}`}
-                    {...product}
-                    onClick={() => handleProductClick(product)}
-                  />
-                ))}
-              </div>
-            </div>
-          )}
+                {/* Past Challenges Category */}
+                <CategoryBadge label="Past Challenges" />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {products.pastChallenges.map((product, index) => (
+                    <motion.div
+                      key={`challenges-${index}`}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: (index + 7) * 0.1 }}
+                    >
+                      <ProductCard
+                        {...product}
+                        onClick={() => handleProductClick(product)}
+                      />
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
         {/* Footer */}

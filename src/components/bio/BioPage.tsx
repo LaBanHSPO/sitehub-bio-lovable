@@ -4,6 +4,8 @@ import ProfileHeader from "./ProfileHeader";
 import CategoryBadge from "./CategoryBadge";
 import ProductCard from "./ProductCard";
 import ProductDetail from "./ProductDetail";
+import { useLanguage } from "@/i18n/LanguageContext";
+
 // Demo data matching Dan Koe's store
 const profileData = {
   name: "Dan Koe",
@@ -94,6 +96,7 @@ type Product = {
 
 const BioPage = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const { t } = useLanguage();
 
   const handleProductClick = (product: Product) => {
     setSelectedProduct(product);
@@ -145,7 +148,7 @@ const BioPage = () => {
                 className="flex-1 mt-10 lg:mt-0"
               >
                 {/* Education Category */}
-                <CategoryBadge label="Education" />
+                <CategoryBadge label={t("education")} />
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                   {products.education.map((product, index) => (
                     <ProductCard
@@ -157,7 +160,7 @@ const BioPage = () => {
                 </div>
 
                 {/* Newsletter Category */}
-                <CategoryBadge label="Newsletter, Eden, and My Books" />
+                <CategoryBadge label={t("newsletter")} />
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                   {products.newsletter.map((product, index) => (
                     <ProductCard
@@ -169,7 +172,7 @@ const BioPage = () => {
                 </div>
 
                 {/* Past Challenges Category */}
-                <CategoryBadge label="Past Challenges" />
+                <CategoryBadge label={t("pastChallenges")} />
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {products.pastChallenges.map((product, index) => (
                     <ProductCard
@@ -187,7 +190,7 @@ const BioPage = () => {
         {/* Footer */}
         <div className="mt-16 text-center">
           <p className="text-muted-foreground text-sm">
-            Powered by Stan
+            {t("poweredBy")}
           </p>
         </div>
       </div>

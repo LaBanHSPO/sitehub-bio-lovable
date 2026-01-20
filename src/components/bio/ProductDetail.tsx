@@ -1,5 +1,5 @@
 import { ArrowLeft } from "lucide-react";
-import { motion } from "framer-motion";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -17,28 +17,8 @@ interface ProductDetailProps {
 }
 
 const ProductDetail = ({ product, onBack }: ProductDetailProps) => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
-  };
-
   return (
-    <motion.div
-      className="flex-1"
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-    >
+    <div className="flex-1">
       {/* Hero Image with Back Button */}
       <div className="relative w-full bg-foreground rounded-2xl overflow-hidden mb-6">
         {/* Back Button */}
@@ -243,7 +223,7 @@ const ProductDetail = ({ product, onBack }: ProductDetailProps) => {
 
       {/* Footer spacing */}
       <div className="h-10" />
-    </motion.div>
+    </div>
   );
 };
 

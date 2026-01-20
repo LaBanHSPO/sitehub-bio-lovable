@@ -18,8 +18,8 @@ const ProductCard = ({
   buttonLink = "#",
 }: ProductCardProps) => {
   return (
-    <div className="w-full bg-card border border-border rounded-2xl p-4 space-y-4 hover:shadow-md transition-shadow">
-      <div className="flex gap-4">
+    <div className="w-full bg-card border border-border rounded-2xl p-5 flex flex-col hover:shadow-lg transition-shadow">
+      <div className="flex gap-4 flex-1">
         {/* Product Image */}
         <div className="flex-shrink-0 w-20 h-20 md:w-24 md:h-24 rounded-xl overflow-hidden bg-muted">
           <img
@@ -30,23 +30,23 @@ const ProductCard = ({
         </div>
 
         {/* Content */}
-        <div className="flex-1 min-w-0 space-y-1">
-          <h3 className="font-semibold text-foreground text-sm md:text-base line-clamp-2">
+        <div className="flex-1 min-w-0 space-y-1.5">
+          <h3 className="font-semibold text-foreground text-base leading-tight line-clamp-2">
             {title}
           </h3>
-          <p className="text-muted-foreground text-xs md:text-sm line-clamp-2">
+          <p className="text-muted-foreground text-sm leading-relaxed line-clamp-3">
             {description}
           </p>
           {price && (
-            <p className="text-foreground font-semibold text-sm">{price}</p>
+            <p className="text-[hsl(170,100%,19%)] font-bold text-base">{price}</p>
           )}
         </div>
       </div>
 
       {/* CTA Button */}
-      <a href={buttonLink} target="_blank" rel="noopener noreferrer" className="block">
+      <a href={buttonLink} target="_blank" rel="noopener noreferrer" className="block mt-4">
         <Button 
-          className="w-full rounded-full bg-[hsl(170,100%,19%)] hover:bg-[hsl(170,100%,15%)] text-white font-medium py-5"
+          className="w-full rounded-full bg-[hsl(170,100%,19%)] hover:bg-[hsl(170,100%,15%)] text-white font-semibold py-6 text-base"
         >
           {buttonText}
         </Button>

@@ -15,6 +15,11 @@ export const translations = {
     freeOpenSource: "Free Open Source",
     watchForFree: "Watch For Free",
     
+    // Badges
+    badgeNew: "New",
+    badgeHot: "Hot",
+    badgeLimited: "Limited Slots",
+    
     // Product Titles & Descriptions (for cards)
     zenJournalTitle: "Zen Journal",
     zenJournalDesc: "A mindful journaling app for mental wellness and personal growth.",
@@ -83,6 +88,10 @@ export const translations = {
     freeOpenSource: "Open Source Gratuit",
     watchForFree: "Regarder Gratuitement",
     
+    // Badges
+    badgeNew: "Nouveau",
+    badgeHot: "Populaire",
+    badgeLimited: "Places Limitées",
     // Product Titles & Descriptions
     zenJournalTitle: "Zen Journal",
     zenJournalDesc: "Une application de journaling conscient pour le bien-être mental et la croissance personnelle.",
@@ -151,6 +160,10 @@ export const translations = {
     freeOpenSource: "Kostenlos Open Source",
     watchForFree: "Kostenlos Ansehen",
     
+    // Badges
+    badgeNew: "Neu",
+    badgeHot: "Beliebt",
+    badgeLimited: "Begrenzte Plätze",
     // Product Titles & Descriptions
     zenJournalTitle: "Zen Journal",
     zenJournalDesc: "Eine achtsame Tagebuch-App für psychisches Wohlbefinden und persönliches Wachstum.",
@@ -219,6 +232,10 @@ export const translations = {
     freeOpenSource: "無料オープンソース",
     watchForFree: "無料で視聴",
     
+    // Badges
+    badgeNew: "新着",
+    badgeHot: "人気",
+    badgeLimited: "残りわずか",
     // Product Titles & Descriptions
     zenJournalTitle: "Zen Journal",
     zenJournalDesc: "メンタルウェルネスと自己成長のためのマインドフルジャーナリングアプリ。",
@@ -287,6 +304,10 @@ export const translations = {
     freeOpenSource: "무료 오픈 소스",
     watchForFree: "무료 시청",
     
+    // Badges
+    badgeNew: "신규",
+    badgeHot: "인기",
+    badgeLimited: "한정 모집",
     // Product Titles & Descriptions
     zenJournalTitle: "Zen Journal",
     zenJournalDesc: "정신 건강과 개인 성장을 위한 마음챙김 저널링 앱.",

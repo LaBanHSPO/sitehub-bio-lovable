@@ -78,6 +78,13 @@ const NextLinkBioPage: React.FC<NextLinkBioPageProps> = ({ productId }) => {
         );
     }
 
+    // Get settings with defaults
+    const settings = bioConfig.settings ?? {
+        defaultCollapsed: false,
+        showSegmentTabs: true,
+        showAiTools: true,
+    };
+
     return (
         <div className="min-h-screen bio-background transition-all duration-300">
             <div className="h-12" />
@@ -90,68 +97,73 @@ const NextLinkBioPage: React.FC<NextLinkBioPageProps> = ({ productId }) => {
                     avatar={bioConfig.profile.avatar}
                     coverImage={bioConfig.profile.coverImage}
                     socialLinks={bioConfig.profile.socialLinks}
+                    defaultCollapsed={settings.defaultCollapsed}
                 />
 
-                {/* Segment Control */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.9, duration: 0.5 }}
-                    className="flex justify-center mt-8 px-6"
-                >
-                    <SegmentSwitch
-                        options={[t("links"), t("shop")]}
-                        activeIndex={activeSegment}
-                        onChange={setActiveSegment}
-                    />
-                </motion.div>
+                {/* Segment Control - Only show if enabled */}
+                {settings.showSegmentTabs && (
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.9, duration: 0.5 }}
+                        className="flex justify-center mt-8 px-6"
+                    >
+                        <SegmentSwitch
+                            options={[t("links"), t("shop")]}
+                            activeIndex={activeSegment}
+                            onChange={setActiveSegment}
+                        />
+                    </motion.div>
+                )}
 
-                {/* Content Sections */}
-                <div className="mt-6 sm:mt-8">
-                    <AnimatePresence mode="wait">
-                        {activeSegment === 0 ? (
-                            // Links Section
-                            <motion.div
-                                key="links"
-                                initial={{ opacity: 0, x: -20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                exit={{ opacity: 0, x: 20 }}
-                                transition={{ duration: 0.2 }}
-                                className="space-y-3 sm:space-y-4"
-                            >
-                                {bioConfig.links.map((link, index) => (
-                                    <motion.div
-                                        key={link.id}
-                                        initial={{ opacity: 0, y: 20 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{ delay: index * 0.1 }}
-                                    >
-                                        <LinkPill
-                                            name={link.name}
-                                            url={link.url}
-                                            description={link.description}
-                                            backgroundImage={link.backgroundImage}
-                                        />
-                                    </motion.div>
-                                ))}
-                            </motion.div>
-                        ) : (
-                            // Shop Section
-                            <motion.div
-                                key="shop"
-                                initial={{ opacity: 0, x: 20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                exit={{ opacity: 0, x: -20 }}
-                                transition={{ duration: 0.2 }}
-                            >
-                                <ShopSection products={bioConfig.products} />
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
-                </div>
+                {/* Content Sections - Only show if segment tabs enabled */}
+                {settings.showSegmentTabs && (
+                    <div className="mt-6 sm:mt-8">
+                        <AnimatePresence mode="wait">
+                            {activeSegment === 0 ? (
+                                // Links Section
+                                <motion.div
+                                    key="links"
+                                    initial={{ opacity: 0, x: -20 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    exit={{ opacity: 0, x: 20 }}
+                                    transition={{ duration: 0.2 }}
+                                    className="space-y-3 sm:space-y-4"
+                                >
+                                    {bioConfig.links.map((link, index) => (
+                                        <motion.div
+                                            key={link.id}
+                                            initial={{ opacity: 0, y: 20 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            transition={{ delay: index * 0.1 }}
+                                        >
+                                            <LinkPill
+                                                name={link.name}
+                                                url={link.url}
+                                                description={link.description}
+                                                backgroundImage={link.backgroundImage}
+                                            />
+                                        </motion.div>
+                                    ))}
+                                </motion.div>
+                            ) : (
+                                // Shop Section
+                                <motion.div
+                                    key="shop"
+                                    initial={{ opacity: 0, x: 20 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    exit={{ opacity: 0, x: -20 }}
+                                    transition={{ duration: 0.2 }}
+                                >
+                                    <ShopSection products={bioConfig.products} />
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                    </div>
+                )}
 
-                {/* AI Tools Carousel (always visible) */}
-                {bioConfig.aiTools.length > 0 && (
+                {/* AI Tools Carousel - Only show if enabled */}
+                {settings.showAiTools && bioConfig.aiTools.length > 0 && (
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}

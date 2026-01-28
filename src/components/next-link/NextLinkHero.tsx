@@ -11,6 +11,7 @@ interface NextLinkHeroProps {
     avatar: string;
     coverImage: string;
     socialLinks: SocialLink[];
+    defaultCollapsed?: boolean;
 }
 
 const NextLinkHero: React.FC<NextLinkHeroProps> = ({
@@ -18,9 +19,10 @@ const NextLinkHero: React.FC<NextLinkHeroProps> = ({
     tagline,
     avatar,
     coverImage,
-    socialLinks
+    socialLinks,
+    defaultCollapsed = false
 }) => {
-    const [isCollapsed, setIsCollapsed] = useState(false);
+    const [isCollapsed, setIsCollapsed] = useState(defaultCollapsed);
 
     const getIcon = (iconName: string) => {
         const icons: Record<string, React.ComponentType<{ className?: string }>> = {

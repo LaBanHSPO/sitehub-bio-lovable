@@ -42,12 +42,20 @@ export const aiToolSchema = z.object({
     url: z.string().min(1, 'URL is required'),
 });
 
+// Settings Schema
+export const settingsSchema = z.object({
+    defaultCollapsed: z.boolean().default(false),
+    showSegmentTabs: z.boolean().default(true),
+    showAiTools: z.boolean().default(true),
+});
+
 // Complete Bio Data Schema
 export const bioDataSchema = z.object({
     profile: profileSchema,
     links: z.array(linkSchema),
     products: z.array(productSchema),
     aiTools: z.array(aiToolSchema),
+    settings: settingsSchema.optional(),
 });
 
 // Types
@@ -56,4 +64,5 @@ export type Profile = z.infer<typeof profileSchema>;
 export type Link = z.infer<typeof linkSchema>;
 export type Product = z.infer<typeof productSchema>;
 export type AITool = z.infer<typeof aiToolSchema>;
+export type Settings = z.infer<typeof settingsSchema>;
 export type BioData = z.infer<typeof bioDataSchema>;

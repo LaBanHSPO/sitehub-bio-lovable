@@ -1,7 +1,7 @@
-import BioPage from "@/components/bio/BioPage";
+import NextLinkBioPage from "./NextLinkBioPage";
 
 const Index = () => {
-  return <BioPage />;
+  return <NextLinkBioPage />;
 };
 
 export default Index;

@@ -5,7 +5,19 @@ import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { toast } from "sonner";
-import type { Product } from "./BioPage";
+// Removed import from BioPage to avoid circular dependency/deletion issues
+// import type { Product } from "./BioPage";
+
+export interface Product {
+  id: string;
+  titleKey: string;
+  descriptionKey: string;
+  imageUrl: string;
+  buttonTextKey: string;
+  detailType?: "whiteLabel" | "personalBrand" | "digitalProducts";
+  externalLink?: string;
+  price?: string;
+}
 
 interface ProductDetailProps {
   product: Product;
@@ -267,7 +279,7 @@ const DigitalProductsContent = () => {
 // Default fallback content
 const DefaultContent = ({ product }: { product: Product }) => {
   const { t } = useLanguage();
-  
+
   return (
     <div className="space-y-4">
       <p className="text-foreground">{t(product.descriptionKey as any)}</p>

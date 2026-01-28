@@ -5,7 +5,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { LanguageProvider } from "@/i18n/LanguageContext";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
-import BioPage from "./components/bio/BioPage";
+import NextLinkBioPage from "./pages/NextLinkBioPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -13,7 +13,7 @@ const queryClient = new QueryClient();
 // Wrapper component to handle product detail routing
 const ProductDetailPage = () => {
   const { productId } = useParams<{ productId: string }>();
-  return <BioPage productId={productId} />;
+  return <NextLinkBioPage productId={productId} />;
 };
 
 const App = () => (
@@ -25,7 +25,7 @@ const App = () => (
           <Sonner />
           <BrowserRouter>
             <Routes>
-              <Route path="/" element={<BioPage />} />
+              <Route path="/" element={<NextLinkBioPage />} />
               <Route path="/p/:productId" element={<ProductDetailPage />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />

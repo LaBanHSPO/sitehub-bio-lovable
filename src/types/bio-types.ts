@@ -23,6 +23,13 @@ export const linkSchema = z.object({
     url: z.string().min(1, 'URL is required'),
     description: z.string().min(1, 'Description is required'),
     backgroundImage: z.string().url('Must be a valid URL'),
+    // Optional detail page content
+    detailContent: z.object({
+        subtitle: z.string().optional(),
+        content: z.string(), // Markdown or plain text
+        ctaText: z.string(),
+        ctaUrl: z.string().optional(), // If not provided, uses main url
+    }).optional(),
 });
 
 // Product Schema

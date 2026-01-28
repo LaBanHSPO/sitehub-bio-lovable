@@ -6,9 +6,11 @@ import SegmentSwitch from "@/components/next-link/SegmentSwitch";
 import ShopSection from "@/components/next-link/ShopSection";
 import AIToolsCarousel from "@/components/next-link/AIToolsCarousel";
 import LinkPill from "@/components/next-link/LinkPill";
+import LinkDetail from "@/components/next-link/LinkDetail";
 import ProductDetail from "@/components/bio/ProductDetail";
 import { bioConfig } from "@/config/bio-config";
 import { useLanguage } from "@/i18n/LanguageContext";
+import type { Link } from "@/types/bio-types";
 
 // Type for product detail (from existing BioPage)
 interface NextLinkProduct {
@@ -28,14 +30,13 @@ interface NextLinkBioPageProps {
 
 const NextLinkBioPage: React.FC<NextLinkBioPageProps> = ({ productId }) => {
     const navigate = useNavigate();
-    // Safe language context usage (fallback if not available yet)
     const languageContext = useLanguage();
     const t = languageContext?.t || ((key: string) => key);
 
     const [activeSegment, setActiveSegment] = useState(0);
+    const [selectedLink, setSelectedLink] = useState<Link | null>(null);
 
-    // Helper to find product by ID (for product detail routing)
-    // Maps bioConfig products to the format ProductDetail expects
+    // Helper to find product by ID
     function findProductById(id: string): NextLinkProduct | null {
         const product = bioConfig.products.find(p => p.id.toString() === id);
         if (!product) return null;
@@ -43,7 +44,7 @@ const NextLinkBioPage: React.FC<NextLinkBioPageProps> = ({ productId }) => {
         return {
             id: product.id.toString(),
             titleKey: product.name,
-            descriptionKey: product.name, // Using name as description key for now, actual description would be better
+            descriptionKey: product.name,
             imageUrl: product.image,
             buttonTextKey: "Buy Now",
             externalLink: product.url,
@@ -51,28 +52,43 @@ const NextLinkBioPage: React.FC<NextLinkBioPageProps> = ({ productId }) => {
         };
     }
 
-    // Find product for detail view (if productId provided)
-    const selectedProduct = productId
-        ? findProductById(productId)
-        : null;
+    const selectedProduct = productId ? findProductById(productId) : null;
 
-    // Scroll to top when product changes
     useEffect(() => {
-        if (selectedProduct) {
+        if (selectedProduct || selectedLink) {
             window.scrollTo({ top: 0, behavior: "smooth" });
         }
-    }, [selectedProduct]);
+    }, [selectedProduct, selectedLink]);
 
     const handleBack = () => {
-        navigate("/");
+        if (selectedLink) {
+            setSelectedLink(null);
+        } else {
+            navigate("/");
+        }
     };
 
-    // If showing product detail, render that instead
+    const handleViewLinkDetail = (link: Link) => {
+        setSelectedLink(link);
+    };
+
+    // If showing product detail
     if (selectedProduct) {
         return (
             <div className="min-h-screen bio-background">
                 <div className="max-w-sm mx-auto py-8 px-4">
                     <ProductDetail product={selectedProduct} onBack={handleBack} />
+                </div>
+            </div>
+        );
+    }
+
+    // If showing link detail
+    if (selectedLink) {
+        return (
+            <div className="min-h-screen bio-background">
+                <div className="max-w-sm mx-auto py-8 px-4">
+                    <LinkDetail link={selectedLink} onBack={handleBack} />
                 </div>
             </div>
         );
@@ -119,7 +135,6 @@ const NextLinkBioPage: React.FC<NextLinkBioPageProps> = ({ productId }) => {
                 {/* Content Sections */}
                 <div className="mt-6 sm:mt-8">
                     {settings.showSegmentTabs ? (
-                        // With tabs - show based on active segment
                         <AnimatePresence mode="wait">
                             {activeSegment === 0 ? (
                                 <motion.div
@@ -142,6 +157,8 @@ const NextLinkBioPage: React.FC<NextLinkBioPageProps> = ({ productId }) => {
                                                 url={link.url}
                                                 description={link.description}
                                                 backgroundImage={link.backgroundImage}
+                                                hasDetail={!!link.detailContent}
+                                                onViewDetail={() => handleViewLinkDetail(link)}
                                             />
                                         </motion.div>
                                     ))}
@@ -159,7 +176,6 @@ const NextLinkBioPage: React.FC<NextLinkBioPageProps> = ({ productId }) => {
                             )}
                         </AnimatePresence>
                     ) : (
-                        // Without tabs - just show links directly
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -178,6 +194,8 @@ const NextLinkBioPage: React.FC<NextLinkBioPageProps> = ({ productId }) => {
                                         url={link.url}
                                         description={link.description}
                                         backgroundImage={link.backgroundImage}
+                                        hasDetail={!!link.detailContent}
+                                        onViewDetail={() => handleViewLinkDetail(link)}
                                     />
                                 </motion.div>
                             ))}

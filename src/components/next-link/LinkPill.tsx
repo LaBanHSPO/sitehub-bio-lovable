@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { ExternalLink, ChevronRight } from 'lucide-react';
 
 interface LinkPillProps {
     name: string;
@@ -8,44 +9,48 @@ interface LinkPillProps {
     icon?: React.ReactNode;
     description?: string;
     backgroundImage?: string;
+    hasDetail?: boolean;
+    onViewDetail?: () => void;
 }
 
 const LinkPill: React.FC<LinkPillProps> = ({
     name,
     url,
     avatar,
-    icon,
     description,
-    backgroundImage
+    backgroundImage,
+    hasDetail = false,
+    onViewDetail
 }) => {
-    const handleClick = () => {
-        // Haptic feedback for mobile
+    const handleExternalLink = (e: React.MouseEvent) => {
+        e.stopPropagation();
         if (navigator.vibrate) {
             navigator.vibrate(50);
         }
         window.open(url, '_blank');
     };
 
+    const handleViewDetail = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        if (navigator.vibrate) {
+            navigator.vibrate(50);
+        }
+        onViewDetail?.();
+    };
+
     return (
-        <motion.a
-            href={url}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={(e) => {
-                e.preventDefault();
-                handleClick();
-            }}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
+        <motion.div
+            whileHover={{ scale: 1.01 }}
+            whileTap={{ scale: 0.99 }}
             className="block w-full"
-            style={{ textDecoration: 'none', color: 'inherit' }}
         >
             <div
                 className="flex w-full h-20 rounded-xl overflow-hidden bg-card/80 backdrop-blur-sm shadow-sm hover:shadow-md transition-all duration-300"
             >
                 {/* IMAGE - Compact square */}
                 <div
-                    className="w-20 h-20 flex-shrink-0"
+                    className="w-20 h-20 flex-shrink-0 cursor-pointer"
+                    onClick={handleExternalLink}
                     style={{
                         backgroundImage: backgroundImage
                             ? `url('${backgroundImage}')`
@@ -58,7 +63,10 @@ const LinkPill: React.FC<LinkPillProps> = ({
                 />
 
                 {/* CONTENT */}
-                <div className="flex-1 flex flex-col justify-center px-4 py-2 min-w-0">
+                <div 
+                    className="flex-1 flex flex-col justify-center px-4 py-2 min-w-0 cursor-pointer"
+                    onClick={hasDetail ? handleViewDetail : handleExternalLink}
+                >
                     <div className="text-sm font-semibold text-foreground leading-tight truncate">
                         {name}
                     </div>
@@ -69,15 +77,36 @@ const LinkPill: React.FC<LinkPillProps> = ({
                     )}
                 </div>
 
-                {/* Arrow indicator */}
-                <div className="flex items-center pr-4 text-muted-foreground/50">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
+                {/* Action Icons */}
+                <div className="flex items-center gap-1 pr-3">
+                    {/* External Link Icon */}
+                    <motion.button
+                        onClick={handleExternalLink}
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                        className="w-8 h-8 rounded-full bg-muted/50 hover:bg-muted flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
+                        aria-label="Open external link"
+                    >
+                        <ExternalLink className="w-3.5 h-3.5" />
+                    </motion.button>
+
+                    {/* View Detail Icon - Only show if has detail */}
+                    {hasDetail && (
+                        <motion.button
+                            onClick={handleViewDetail}
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.9 }}
+                            className="w-8 h-8 rounded-full bg-primary/10 hover:bg-primary/20 flex items-center justify-center text-primary hover:text-primary transition-colors"
+                            aria-label="View details"
+                        >
+                            <ChevronRight className="w-4 h-4" />
+                        </motion.button>
+                    )}
                 </div>
             </div>
-        </motion.a>
+        </motion.div>
     );
 };
 
 export default LinkPill;
+

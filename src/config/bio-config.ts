@@ -45,6 +45,11 @@ export const bioConfig: BioData = {
             url: "https://example.com/portfolio",
             description: "Check out my latest projects and work",
             backgroundImage: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=200&h=200&fit=crop",
+            detailContent: {
+                subtitle: "Showcasing my best work",
+                content: "Welcome to my portfolio! Here you'll find a collection of my most impactful projects spanning web development, UI/UX design, and digital products.\n\n**What you'll discover:**\n- 50+ completed projects\n- Case studies with real results\n- Behind-the-scenes insights\n- Technologies I work with",
+                ctaText: "View Full Portfolio",
+            },
         },
         {
             id: 2,
@@ -52,6 +57,11 @@ export const bioConfig: BioData = {
             url: "https://example.com/newsletter",
             description: "Weekly tips on productivity & growth",
             backgroundImage: "https://images.unsplash.com/photo-1586339949916-3e9457bef6d3?w=200&h=200&fit=crop",
+            detailContent: {
+                subtitle: "Join 10,000+ subscribers",
+                content: "Every week, I share actionable insights on productivity, personal growth, and building a successful digital presence.\n\n**What you'll get:**\n- Weekly curated tips\n- Exclusive resources\n- Early access to new content\n- Community discussions",
+                ctaText: "Subscribe Now",
+            },
         },
         {
             id: 3,

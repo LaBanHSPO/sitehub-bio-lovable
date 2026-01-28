@@ -117,6 +117,17 @@ export const bioConfig: BioData = {
             url: "https://perplexity.ai"
         },
     ],
+    /**
+     * Display Settings
+     * - defaultCollapsed: Start with profile collapsed (true) or expanded (false)
+     * - showSegmentTabs: Show Links/Shop segment tabs (true/false)
+     * - showAiTools: Show AI Tools carousel section (true/false)
+     */
+    settings: {
+        defaultCollapsed: true,
+        showSegmentTabs: false,
+        showAiTools: false,
+    },
 };
 
 // Default export for convenience

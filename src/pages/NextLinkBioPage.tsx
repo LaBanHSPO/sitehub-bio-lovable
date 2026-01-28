@@ -107,7 +107,7 @@ const NextLinkBioPage: React.FC<NextLinkBioPageProps> = ({ productId }) => {
                 </motion.div>
 
                 {/* Content Sections */}
-                <div className="px-4 sm:px-6 mt-6 sm:mt-8">
+                <div className="mt-6 sm:mt-8">
                     <AnimatePresence mode="wait">
                         {activeSegment === 0 ? (
                             // Links Section

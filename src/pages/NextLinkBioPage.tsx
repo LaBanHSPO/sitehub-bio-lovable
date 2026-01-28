@@ -116,12 +116,12 @@ const NextLinkBioPage: React.FC<NextLinkBioPageProps> = ({ productId }) => {
                     </motion.div>
                 )}
 
-                {/* Content Sections - Only show if segment tabs enabled */}
-                {settings.showSegmentTabs && (
-                    <div className="mt-6 sm:mt-8">
+                {/* Content Sections */}
+                <div className="mt-6 sm:mt-8">
+                    {settings.showSegmentTabs ? (
+                        // With tabs - show based on active segment
                         <AnimatePresence mode="wait">
                             {activeSegment === 0 ? (
-                                // Links Section
                                 <motion.div
                                     key="links"
                                     initial={{ opacity: 0, x: -20 }}
@@ -147,7 +147,6 @@ const NextLinkBioPage: React.FC<NextLinkBioPageProps> = ({ productId }) => {
                                     ))}
                                 </motion.div>
                             ) : (
-                                // Shop Section
                                 <motion.div
                                     key="shop"
                                     initial={{ opacity: 0, x: 20 }}
@@ -159,8 +158,32 @@ const NextLinkBioPage: React.FC<NextLinkBioPageProps> = ({ productId }) => {
                                 </motion.div>
                             )}
                         </AnimatePresence>
-                    </div>
-                )}
+                    ) : (
+                        // Without tabs - just show links directly
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.3, duration: 0.4 }}
+                            className="space-y-3 sm:space-y-4"
+                        >
+                            {bioConfig.links.map((link, index) => (
+                                <motion.div
+                                    key={link.id}
+                                    initial={{ opacity: 0, y: 15 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: 0.4 + index * 0.08 }}
+                                >
+                                    <LinkPill
+                                        name={link.name}
+                                        url={link.url}
+                                        description={link.description}
+                                        backgroundImage={link.backgroundImage}
+                                    />
+                                </motion.div>
+                            ))}
+                        </motion.div>
+                    )}
+                </div>
 
                 {/* AI Tools Carousel - Only show if enabled */}
                 {settings.showAiTools && bioConfig.aiTools.length > 0 && (

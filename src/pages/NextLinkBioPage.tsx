@@ -107,7 +107,7 @@ const NextLinkBioPage: React.FC<NextLinkBioPageProps> = ({ productId }) => {
                 </motion.div>
 
                 {/* Content Sections */}
-                <div className="px-6 mt-8">
+                <div className="px-4 sm:px-6 mt-6 sm:mt-8">
                     <AnimatePresence mode="wait">
                         {activeSegment === 0 ? (
                             // Links Section
@@ -117,7 +117,7 @@ const NextLinkBioPage: React.FC<NextLinkBioPageProps> = ({ productId }) => {
                                 animate={{ opacity: 1, x: 0 }}
                                 exit={{ opacity: 0, x: 20 }}
                                 transition={{ duration: 0.2 }}
-                                className="space-y-4"
+                                className="space-y-3 sm:space-y-4"
                             >
                                 {bioConfig.links.map((link, index) => (
                                     <motion.div
@@ -156,7 +156,7 @@ const NextLinkBioPage: React.FC<NextLinkBioPageProps> = ({ productId }) => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 1.1, duration: 0.5 }}
-                        className="mt-8 px-6"
+                        className="mt-6 sm:mt-8 px-4 sm:px-6"
                     >
                         <h3 className="text-sm font-medium text-muted-foreground mb-4 text-center">
                             {t("aiToolsTitle")}

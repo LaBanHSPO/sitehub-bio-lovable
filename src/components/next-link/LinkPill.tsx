@@ -41,7 +41,7 @@ const LinkPill: React.FC<LinkPillProps> = ({
             style={{ textDecoration: 'none', color: 'inherit' }}
         >
             <div
-                className="flex w-full h-32 rounded-2xl overflow-hidden border border-border bg-card shadow-lg hover:shadow-xl transition-all duration-300"
+                className="flex w-full h-36 rounded-2xl overflow-hidden bg-card/80 backdrop-blur-sm shadow-sm hover:shadow-md transition-all duration-300"
                 style={{
                     fontFamily: "'Roboto', sans-serif"
                 }}

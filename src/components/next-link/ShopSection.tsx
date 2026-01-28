@@ -13,7 +13,7 @@ const ShopSection: React.FC<ShopSectionProps> = ({ products }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.3 }}
-            className="bg-muted rounded-3xl p-6 shadow-sm"
+            className="space-y-3"
         >
             {/* Top Row - 2 products side by side */}
             <div className="grid grid-cols-2 gap-3 mb-3">

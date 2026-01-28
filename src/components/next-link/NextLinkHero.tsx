@@ -1,6 +1,6 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Globe, Twitter, Mail, Youtube } from 'lucide-react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Globe, Twitter, Mail, Youtube, ChevronUp, ChevronDown } from 'lucide-react';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { LanguageSelector } from '@/components/LanguageSelector';
 import type { SocialLink } from '@/types/bio-types';
@@ -20,6 +20,8 @@ const NextLinkHero: React.FC<NextLinkHeroProps> = ({
     coverImage,
     socialLinks
 }) => {
+    const [isCollapsed, setIsCollapsed] = useState(false);
+
     const getIcon = (iconName: string) => {
         const icons: Record<string, React.ComponentType<{ className?: string }>> = {
             Globe: Globe,
@@ -31,6 +33,60 @@ const NextLinkHero: React.FC<NextLinkHeroProps> = ({
         return <IconComponent className="w-4 h-4" />;
     };
 
+    // Collapsed View
+    if (isCollapsed) {
+        return (
+            <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                className="bio-card rounded-2xl shadow-lg px-4 py-3"
+            >
+                <div className="flex items-center justify-between">
+                    {/* Left: Avatar + Name + Socials */}
+                    <div className="flex items-center gap-3">
+                        <img
+                            src={avatar}
+                            alt={name}
+                            className="w-10 h-10 rounded-full object-cover border-2 border-border"
+                        />
+                        <div>
+                            <h2 className="font-semibold text-foreground text-sm">{name}</h2>
+                            <div className="flex items-center gap-1.5 mt-1">
+                                {socialLinks.map((link) => (
+                                    <a
+                                        key={link.name}
+                                        href={link.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="w-6 h-6 bg-muted hover:bg-muted/80 rounded-full flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
+                                        aria-label={link.name}
+                                    >
+                                        {getIcon(link.icon)}
+                                    </a>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Right: Controls + Expand */}
+                    <div className="flex items-center gap-2">
+                        <ThemeToggle />
+                        <LanguageSelector />
+                        <button
+                            onClick={() => setIsCollapsed(false)}
+                            className="w-8 h-8 bg-muted hover:bg-muted/80 rounded-full flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
+                            aria-label="Expand profile"
+                        >
+                            <ChevronDown className="w-4 h-4" />
+                        </button>
+                    </div>
+                </div>
+            </motion.div>
+        );
+    }
+
+    // Expanded View
     return (
         <div className="relative">
             {/* Controls - Top Left */}
@@ -38,6 +94,15 @@ const NextLinkHero: React.FC<NextLinkHeroProps> = ({
                 <ThemeToggle />
                 <LanguageSelector />
             </div>
+
+            {/* Collapse Button - Top Right */}
+            <button
+                onClick={() => setIsCollapsed(true)}
+                className="absolute top-4 right-4 z-20 w-8 h-8 bg-black/30 hover:bg-black/50 backdrop-blur-sm rounded-full flex items-center justify-center text-white/80 hover:text-white transition-colors"
+                aria-label="Collapse profile"
+            >
+                <ChevronUp className="w-4 h-4" />
+            </button>
 
             {/* Cover Image with Professional Blur Effect */}
             <motion.div
@@ -64,7 +129,7 @@ const NextLinkHero: React.FC<NextLinkHeroProps> = ({
                     className="absolute bottom-4 right-4 z-10"
                 >
                     <div className="relative">
-                        <div className="w-20 h-20 rounded-full bg-white p-1 shadow-xl dark:bg-gray-800">
+                        <div className="w-20 h-20 rounded-full bg-background p-1 shadow-xl">
                             <img
                                 src={avatar}
                                 alt={name}
@@ -78,8 +143,8 @@ const NextLinkHero: React.FC<NextLinkHeroProps> = ({
                 </motion.div>
 
                 {/* Decorative elements */}
-                <div className="absolute top-4 right-4 w-2 h-2 bg-white/30 rounded-full"></div>
-                <div className="absolute top-8 right-8 w-1 h-1 bg-white/20 rounded-full"></div>
+                <div className="absolute top-4 right-16 w-2 h-2 bg-white/30 rounded-full"></div>
+                <div className="absolute top-8 right-20 w-1 h-1 bg-white/20 rounded-full"></div>
             </motion.div>
 
             {/* Profile Info with Professional Typography */}

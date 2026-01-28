@@ -10,16 +10,17 @@ interface AIToolsCarouselProps {
 }
 
 const AIToolsCarousel: React.FC<AIToolsCarouselProps> = ({ tools }) => {
+    const autoplayPlugin = React.useRef(
+        Autoplay({ delay: 2500, stopOnInteraction: false, stopOnMouseEnter: true })
+    );
+
     const [emblaRef, emblaApi] = useEmblaCarousel(
         {
             loop: true,
             align: 'start',
             slidesToScroll: 1,
-            breakpoints: {
-                '(min-width: 768px)': { slidesToScroll: 2 }
-            }
         },
-        [Autoplay({ delay: 3000, stopOnInteraction: false })]
+        [autoplayPlugin.current]
     );
 
     const scrollPrev = useCallback(() => {
@@ -32,7 +33,6 @@ const AIToolsCarousel: React.FC<AIToolsCarouselProps> = ({ tools }) => {
 
     useEffect(() => {
         if (!emblaApi) return;
-        // Optional: Add any additional setup here
     }, [emblaApi]);
 
     return (
@@ -42,31 +42,31 @@ const AIToolsCarousel: React.FC<AIToolsCarouselProps> = ({ tools }) => {
                     {tools.map((tool, index) => (
                         <motion.div
                             key={tool.id}
-                            className="flex-[0_0_280px] min-w-0 mr-4"
-                            initial={{ opacity: 0, y: 40 }}
+                            className="flex-[0_0_160px] min-w-0 mr-3"
+                            initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: index * 0.1 }}
+                            transition={{ delay: index * 0.05 }}
                         >
                             <motion.a
                                 href={tool.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                whileHover={{ scale: 1.02, y: -2 }}
+                                whileHover={{ scale: 1.03 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="bio-card rounded-xl p-4 shadow-sm transition-all-smooth hover:shadow-lg block"
+                                className="bio-card rounded-xl p-3 shadow-sm transition-all-smooth hover:shadow-md block"
                             >
-                                <div className="flex items-center space-x-4">
+                                <div className="flex items-center space-x-3">
                                     <img
                                         src={tool.logo}
                                         alt={tool.name}
-                                        width={48}
-                                        height={48}
+                                        width={36}
+                                        height={36}
                                         className="rounded-lg object-cover"
                                         loading="lazy"
                                     />
-                                    <div>
-                                        <h3 className="font-medium text-foreground">{tool.name}</h3>
-                                        <p className="text-sm text-muted-foreground">AI Tool</p>
+                                    <div className="min-w-0">
+                                        <h3 className="font-medium text-foreground text-sm truncate">{tool.name}</h3>
+                                        <p className="text-xs text-muted-foreground">AI Tool</p>
                                     </div>
                                 </div>
                             </motion.a>

@@ -1,41 +1,56 @@
 import type { BioData } from '@/types/bio-types';
 
-/**
- * Bio Page Configuration
- * 
- * Edit this file to customize your bio page content.
- * All fields are validated at build time via TypeScript.
- * 
- * Icons available for socialLinks.icon:
- * - Globe, Twitter, Mail, Youtube
- */
 export const bioConfig: BioData = {
     profile: {
-        name: "John Doe",
-        tagline: "Digital Creator | Tech Enthusiast | Building the future",
-        avatar: "https://github.com/shadcn.png",
-        coverImage: "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=800&h=400&fit=crop",
+        name: "Sheena Olsen\n(sitehub)",
+        tagline: "model | actress",
+        avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop",
+        coverImage: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=1920&h=1080&fit=crop",
         socialLinks: [
-            {
-                name: "Website",
-                url: "https://your-website.com",
-                icon: "Globe",
-            },
-            {
-                name: "X (Twitter)",
-                url: "https://x.com/yourhandle",
-                icon: "Twitter",
-            },
-            {
-                name: "Email",
-                url: "mailto:contact@yourdomain.com",
-                icon: "Mail",
-            },
             {
                 name: "YouTube",
                 url: "https://youtube.com/@yourchannel",
                 icon: "Youtube",
             },
+        ],
+    },
+    about: {
+        image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&h=700&fit=crop",
+        paragraphs: [
+            "Los Angeles-based Sheena Olsen is a highly sought-after high-fashion model and actress captivating audiences on screen and in print. Gracing the pages of leading fashion publications and walking the runways for prestigious houses, Sheena brings a captivating presence to every campaign.",
+            "Her versatility allows her to embody diverse styles, making her a trusted collaborator for luxury brands. Beyond stills, Sheena seamlessly translates her talent to captivating commercial performances, bringing brand narratives to life. She welcomes opportunities to collaborate and elevate brand visions with her dynamic presence.",
+            "Notably, her dedication to the craft has led to roles on critically acclaimed HBO productions, showcasing her ability to connect with audiences and deliver impactful performances. Sheena fosters a passion for wellness and mindfulness, a pursuit that brings depth and authenticity to every project she undertakes."
+        ],
+    },
+    gallery: {
+        title: "High Fashion Portfolio | Hivanmedia Photography",
+        images: [
+            { url: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=600&h=800&fit=crop", alt: "Fashion portrait 1" },
+            { url: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&h=800&fit=crop", alt: "Fashion portrait 2" },
+            { url: "https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=600&h=800&fit=crop", alt: "Fashion portrait 3" },
+        ],
+    },
+    brandPartnerships: {
+        title: "Past Brand Partnerships",
+        brands: [
+            { name: "People" },
+            { name: "BRIT+CO." },
+            { name: "POPSUGAR." },
+            { name: "GLAMOUR" },
+        ],
+    },
+    video: {
+        thumbnailUrl: "https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=1200&h=700&fit=crop",
+        videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    },
+    contact: {
+        heading: "Open For Bookings",
+        email: "contact@sheenaolsen.com",
+        backgroundImage: "https://images.unsplash.com/photo-1490750967868-88aa4f44baee?w=1200&h=800&fit=crop",
+        profileImage: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&h=800&fit=crop",
+        buttons: [
+            { label: "Contact Information", url: "mailto:contact@sheenaolsen.com", variant: "primary" },
+            { label: "Portfolio", url: "https://example.com/portfolio", variant: "secondary" },
         ],
     },
     links: [
@@ -47,92 +62,13 @@ export const bioConfig: BioData = {
             backgroundImage: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=200&h=200&fit=crop",
             detailContent: {
                 subtitle: "Showcasing my best work",
-                content: "Welcome to my portfolio! Here you'll find a collection of my most impactful projects spanning web development, UI/UX design, and digital products.\n\n**What you'll discover:**\n- 50+ completed projects\n- Case studies with real results\n- Behind-the-scenes insights\n- Technologies I work with",
+                content: "Welcome to my portfolio! Here you'll find a collection of my most impactful projects.",
                 ctaText: "View Full Portfolio",
             },
         },
-        {
-            id: 2,
-            name: "Newsletter",
-            url: "https://example.com/newsletter",
-            description: "Weekly tips on productivity & growth",
-            backgroundImage: "https://images.unsplash.com/photo-1586339949916-3e9457bef6d3?w=200&h=200&fit=crop",
-            detailContent: {
-                subtitle: "Join 10,000+ subscribers",
-                content: "Every week, I share actionable insights on productivity, personal growth, and building a successful digital presence.\n\n**What you'll get:**\n- Weekly curated tips\n- Exclusive resources\n- Early access to new content\n- Community discussions",
-                ctaText: "Subscribe Now",
-            },
-        },
-        {
-            id: 3,
-            name: "Free Resources",
-            url: "https://example.com/resources",
-            description: "Templates, guides and tools",
-            backgroundImage: "https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?w=200&h=200&fit=crop",
-        },
-        {
-            id: 4,
-            name: "YouTube Channel",
-            url: "https://youtube.com/@channel",
-            description: "Video tutorials and vlogs",
-            backgroundImage: "https://images.unsplash.com/photo-1611162616475-46b635cb6868?w=200&h=200&fit=crop",
-        },
     ],
-    products: [
-        {
-            id: 1,
-            name: "Sample Product",
-            image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=500&h=500&fit=crop",
-            price: "$49",
-            url: "https://example.com/product",
-        },
-        {
-            id: 2,
-            name: "Premium Course",
-            image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=500&h=500&fit=crop",
-            price: "$99",
-            url: "https://example.com/course",
-        },
-        {
-            id: 3,
-            name: "Exclusive Bundle",
-            image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=500&h=500&fit=crop",
-            price: "$199",
-            url: "https://example.com/bundle",
-        },
-    ],
-    aiTools: [
-        {
-            id: 1,
-            name: "ChatGPT",
-            logo: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=60&h=60&fit=crop",
-            url: "https://chatgpt.com"
-        },
-        {
-            id: 2,
-            name: "Midjourney",
-            logo: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=60&h=60&fit=crop",
-            url: "https://midjourney.com"
-        },
-        {
-            id: 3,
-            name: "Claude",
-            logo: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=60&h=60&fit=crop",
-            url: "https://claude.ai"
-        },
-        {
-            id: 4,
-            name: "Perplexity",
-            logo: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=60&h=60&fit=crop",
-            url: "https://perplexity.ai"
-        },
-    ],
-    /**
-     * Display Settings
-     * - defaultCollapsed: Start with profile collapsed (true) or expanded (false)
-     * - showSegmentTabs: Show Links/Shop segment tabs (true/false)
-     * - showAiTools: Show AI Tools carousel section (true/false)
-     */
+    products: [],
+    aiTools: [],
     settings: {
         defaultCollapsed: true,
         showSegmentTabs: false,
@@ -140,5 +76,4 @@ export const bioConfig: BioData = {
     },
 };
 
-// Default export for convenience
 export default bioConfig;

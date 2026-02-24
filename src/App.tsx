@@ -4,7 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { LanguageProvider } from "@/i18n/LanguageContext";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NextLinkBioPage from "./pages/NextLinkBioPage";
 import NotFound from "./pages/NotFound";
 
@@ -12,8 +12,7 @@ const queryClient = new QueryClient();
 
 // Wrapper component to handle product detail routing
 const ProductDetailPage = () => {
-  const { productId } = useParams<{ productId: string }>();
-  return <NextLinkBioPage productId={productId} />;
+  return <NextLinkBioPage />;
 };
 
 const App = () => (

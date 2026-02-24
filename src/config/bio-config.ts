@@ -2,71 +2,76 @@ import type { BioData } from '@/types/bio-types';
 
 export const bioConfig: BioData = {
     profile: {
-        name: "Sheena Olsen\n(sitehub)",
-        tagline: "model | actress",
-        avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop",
-        coverImage: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=1920&h=1080&fit=crop",
+        name: "SAGOGA",
+        tagline: "Find Balance & Peace Through Alternative Therapy",
+        avatar: "https://images.unsplash.com/photo-1577495508326-19a1b3cf65b7?w=400&h=400&fit=crop",
         socialLinks: [
-            {
-                name: "YouTube",
-                url: "https://youtube.com/@yourchannel",
-                icon: "Youtube",
-            },
+            { name: "Phone", url: "tel:+1666444555", icon: "Phone" },
+            { name: "Facebook", url: "https://facebook.com", icon: "Facebook" },
+            { name: "Website", url: "https://example.com", icon: "Globe" },
         ],
     },
-    about: {
-        image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&h=700&fit=crop",
-        paragraphs: [
-            "Los Angeles-based Sheena Olsen is a highly sought-after high-fashion model and actress captivating audiences on screen and in print. Gracing the pages of leading fashion publications and walking the runways for prestigious houses, Sheena brings a captivating presence to every campaign.",
-            "Her versatility allows her to embody diverse styles, making her a trusted collaborator for luxury brands. Beyond stills, Sheena seamlessly translates her talent to captivating commercial performances, bringing brand narratives to life. She welcomes opportunities to collaborate and elevate brand visions with her dynamic presence.",
-            "Notably, her dedication to the craft has led to roles on critically acclaimed HBO productions, showcasing her ability to connect with audiences and deliver impactful performances. Sheena fosters a passion for wellness and mindfulness, a pursuit that brings depth and authenticity to every project she undertakes."
-        ],
+    services: [
+        { id: 1, name: "Acupuncture", image: "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?w=400&h=500&fit=crop" },
+        { id: 2, name: "Reflexology", image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=400&h=500&fit=crop" },
+        { id: 3, name: "Traditional Chinese Medicine", image: "https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=400&h=500&fit=crop" },
+        { id: 4, name: "Reiki", image: "https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?w=400&h=500&fit=crop" },
+    ],
+    ctaButton: {
+        label: "Schedule a treatment",
+        url: "https://www.example.com/booking",
     },
-    gallery: {
-        title: "High Fashion Portfolio | Hivanmedia Photography",
-        images: [
-            { url: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=600&h=800&fit=crop", alt: "Fashion portrait 1" },
-            { url: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&h=800&fit=crop", alt: "Fashion portrait 2" },
-            { url: "https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=600&h=800&fit=crop", alt: "Fashion portrait 3" },
-        ],
+    team: [
+        { id: 1, name: "Dr. Emily Lee", role: "Chinese Medicine", image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=300&h=300&fit=crop" },
+        { id: 2, name: "Ethan Miller", role: "Reflexology Specialist", image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=300&h=300&fit=crop" },
+        { id: 3, name: "Dr. Anya Teal", role: "Founder & Lead Therapist", image: "https://images.unsplash.com/photo-1594824476967-48c8b964f90c?w=300&h=300&fit=crop" },
+    ],
+    contactInfo: {
+        email: "info@mysite.com",
+        phone: "666-444-555",
+        location: "500 Terry Francine St, San Francisco",
     },
-    brandPartnerships: {
-        title: "Past Brand Partnerships",
-        brands: [
-            { name: "People" },
-            { name: "BRIT+CO." },
-            { name: "POPSUGAR." },
-            { name: "GLAMOUR" },
-        ],
-    },
-    video: {
-        thumbnailUrl: "https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=1200&h=700&fit=crop",
-        videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    },
-    contact: {
-        heading: "Open For Bookings",
-        email: "contact@sheenaolsen.com",
-        backgroundImage: "https://images.unsplash.com/photo-1490750967868-88aa4f44baee?w=1200&h=800&fit=crop",
-        profileImage: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&h=800&fit=crop",
-        buttons: [
-            { label: "Contact Information", url: "mailto:contact@sheenaolsen.com", variant: "primary" },
-            { label: "Portfolio", url: "https://example.com/portfolio", variant: "secondary" },
-        ],
-    },
-    links: [
+    testimonials: [
         {
             id: 1,
-            name: "My Portfolio",
-            url: "https://example.com/portfolio",
-            description: "Check out my latest projects and work",
-            backgroundImage: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=200&h=200&fit=crop",
-            detailContent: {
-                subtitle: "Showcasing my best work",
-                content: "Welcome to my portfolio! Here you'll find a collection of my most impactful projects.",
-                ctaText: "View Full Portfolio",
-            },
+            name: "Ashley Martinez",
+            avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop",
+            title: "Truly relaxing",
+            content: "Use this space to share a testimonial quote about the business, its products or its services. Insert a quote from a real customer or client here to build trust and win over site visitors.",
+            rating: 5,
+        },
+        {
+            id: 2,
+            name: "Michael Bill",
+            avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop",
+            title: "Life changing",
+            content: "Use this space to share a testimonial quote about the business, its products or its services. Insert a quote from a real customer or client here to build trust and win over site visitors.",
+            rating: 5,
+        },
+        {
+            id: 3,
+            name: "Dona Johnson",
+            avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop",
+            title: "Beyond professional",
+            content: "Use this space to share a testimonial quote about the business, its products or its services. Insert a quote from a real customer or client here to build trust and win over site visitors.",
+            rating: 5,
         },
     ],
+    instagramFeed: {
+        handle: "DIKUR",
+        followers: "100k followers",
+        posts: "240 posts",
+        profileImage: "https://images.unsplash.com/photo-1577495508326-19a1b3cf65b7?w=100&h=100&fit=crop",
+        images: [
+            "https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?w=300&h=300&fit=crop",
+            "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=300&h=450&fit=crop",
+            "https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=300&h=300&fit=crop",
+            "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?w=300&h=450&fit=crop",
+            "https://images.unsplash.com/photo-1519823551278-64ac92734fb1?w=300&h=300&fit=crop",
+            "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=300&h=350&fit=crop",
+        ],
+    },
+    links: [],
     products: [],
     aiTools: [],
     settings: {

@@ -1,44 +1,38 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Phone, Menu, X } from "lucide-react";
-import { QRCodeSVG } from "qrcode.react";
+import { Menu, X, ChevronDown, ChevronUp } from "lucide-react";
 import { bioConfig } from "@/config/bio-config";
 
 const NextLinkBioPage: React.FC = () => {
     const [menuOpen, setMenuOpen] = useState(false);
-
-    const vCard = `BEGIN:VCARD
-VERSION:3.0
-FN:${bioConfig.contactInfo?.contactName || "Alex Johnson"}
-TITLE:${bioConfig.contactInfo?.role || ""}
-TEL:${bioConfig.contactInfo?.phone || ""}
-EMAIL:${bioConfig.contactInfo?.email || ""}
-ADR:;;${bioConfig.contactInfo?.location || ""}
-END:VCARD`;
+    const [showMore, setShowMore] = useState(false);
 
     return (
         <div className="min-h-screen relative">
-            {/* Background */}
+            {/* Blurred background */}
             <div
                 className="fixed inset-0 bg-cover bg-center"
                 style={{
                     backgroundImage: `url(${bioConfig.profile.avatar})`,
-                    filter: "blur(30px) brightness(0.4)",
+                    filter: "blur(30px) brightness(0.5)",
                     transform: "scale(1.1)",
                 }}
             />
 
-            {/* Card container */}
-            <div className="relative z-10 flex justify-center px-4 py-8 min-h-screen">
-                <div className="w-full max-w-lg">
+            {/* Main card */}
+            <div className="relative z-10 flex justify-center px-0 md:px-4 md:py-8 min-h-screen">
+                <div className="w-full max-w-3xl">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6 }}
-                        className="bio-card rounded-2xl shadow-2xl overflow-hidden"
+                        className="md:rounded-2xl shadow-2xl overflow-hidden min-h-screen md:min-h-0"
                     >
-                        {/* Top Navbar */}
-                        <div className="flex items-center justify-between px-5 py-4">
+                        {/* Navbar */}
+                        <div
+                            className="flex items-center justify-between px-5 py-4"
+                            style={{ backgroundColor: "hsl(var(--bio-card))" }}
+                        >
                             <div className="flex items-center gap-3">
                                 <img
                                     src={bioConfig.profile.avatar}
@@ -60,127 +54,77 @@ END:VCARD`;
                             </button>
                         </div>
 
-                        {/* Hero Photo */}
-                        <div className="px-4">
-                            <div className="rounded-xl overflow-hidden">
-                                <img
-                                    src={bioConfig.profile.avatar}
-                                    alt={bioConfig.profile.name}
-                                    className="w-full aspect-[4/3] object-cover"
-                                />
-                            </div>
+                        {/* Hero Image - full width */}
+                        <div>
+                            <img
+                                src={bioConfig.profile.heroImage || bioConfig.profile.avatar}
+                                alt="Hero"
+                                className="w-full aspect-[16/9] object-cover"
+                            />
                         </div>
 
-                        {/* Name & Role */}
-                        <div className="text-center px-6 pt-6 pb-2">
-                            <h1
-                                className="text-2xl font-bold font-serif"
-                                style={{ color: "hsl(var(--bio-card-foreground))" }}
-                            >
-                                {bioConfig.contactInfo?.contactName || "Alex Johnson"}
-                            </h1>
-                            <p
-                                className="text-sm mt-1 font-serif"
-                                style={{ color: "hsl(var(--bio-card-muted))" }}
-                            >
-                                {bioConfig.contactInfo?.role || "CEO at Hopp"}
-                            </p>
-                            <p
-                                className="text-base mt-3 font-serif italic"
-                                style={{ color: "hsl(var(--bio-card-foreground))" }}
-                            >
-                                {bioConfig.profile.tagline}
-                            </p>
-                        </div>
-
-                        {/* Divider */}
-                        <div className="px-6 py-4">
-                            <div className="w-full h-px" style={{ backgroundColor: "hsl(var(--bio-card-divider))" }} />
-                        </div>
-
-                        {/* Contact Info */}
-                        <div className="px-6 space-y-5">
-                            {/* Work Email */}
-                            <div className="flex items-start gap-4">
-                                <Mail className="w-5 h-5 mt-1 flex-shrink-0" style={{ color: "hsl(var(--bio-card-muted))" }} />
-                                <div>
-                                    <p className="text-sm font-bold font-serif" style={{ color: "hsl(var(--bio-card-foreground))" }}>
-                                        Work Email
-                                    </p>
-                                    <a
-                                        href={`mailto:${bioConfig.contactInfo?.email}`}
-                                        className="text-sm font-serif"
-                                        style={{ color: "hsl(var(--bio-card-muted))" }}
-                                    >
-                                        {bioConfig.contactInfo?.email}
-                                    </a>
-                                </div>
-                            </div>
-
-                            {/* Phone */}
-                            <div className="flex items-start gap-4">
-                                <Phone className="w-5 h-5 mt-1 flex-shrink-0" style={{ color: "hsl(var(--bio-card-muted))" }} />
-                                <div>
-                                    <p className="text-sm font-bold font-serif" style={{ color: "hsl(var(--bio-card-foreground))" }}>
-                                        Phone
-                                    </p>
-                                    <a
-                                        href={`tel:${bioConfig.contactInfo?.phone}`}
-                                        className="text-sm font-serif"
-                                        style={{ color: "hsl(var(--bio-card-muted))" }}
-                                    >
-                                        {bioConfig.contactInfo?.phone}
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* CTA Buttons */}
-                        <div className="px-6 pt-8 space-y-3">
-                            <button
-                                className="w-full py-4 rounded-full text-base font-bold font-serif transition-colors"
-                                style={{
-                                    backgroundColor: "hsl(var(--bio-card-foreground))",
-                                    color: "hsl(var(--bio-card))",
-                                }}
-                            >
-                                Save as contact
-                            </button>
-                            <button
-                                className="w-full py-4 rounded-full text-base font-bold font-serif transition-colors"
-                                style={{
-                                    backgroundColor: "hsl(var(--bio-card-foreground))",
-                                    color: "hsl(var(--bio-card))",
-                                }}
-                            >
-                                Contact Me
-                            </button>
-                        </div>
-
-                        {/* QR Code */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 10 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            className="px-6 pt-6 pb-8 flex flex-col items-center gap-3"
+                        {/* Our Story Section */}
+                        <div
+                            className="px-6 md:px-10 py-10"
+                            style={{ backgroundColor: "hsl(var(--bio-card))" }}
                         >
-                            <div className="w-full h-px" style={{ backgroundColor: "hsl(var(--bio-card-divider))" }} />
-                            <p
-                                className="text-sm font-serif mt-3"
+                            <h2
+                                className="text-3xl md:text-4xl font-bold font-serif text-center mb-8 italic"
+                                style={{ color: "hsl(var(--bio-card-foreground))" }}
+                            >
+                                {bioConfig.story?.title || "Our Story"}
+                            </h2>
+
+                            <h3
+                                className="text-xl md:text-2xl font-bold font-serif mb-4"
+                                style={{ color: "hsl(var(--bio-card-foreground))" }}
+                            >
+                                {bioConfig.story?.subtitle || "Muting the Noise. Amping the Vibe."}
+                            </h3>
+
+                            <div
+                                className={`text-sm md:text-base font-serif leading-relaxed ${!showMore ? "line-clamp-6" : ""}`}
                                 style={{ color: "hsl(var(--bio-card-muted))" }}
                             >
-                                Scan to save contact
-                            </p>
-                            <div className="bg-white p-3 rounded-xl">
-                                <QRCodeSVG
-                                    value={vCard}
-                                    size={160}
-                                    level="M"
-                                    bgColor="#ffffff"
-                                    fgColor="#2d1f14"
-                                />
+                                {(bioConfig.story?.paragraphs || []).map((p, i) => (
+                                    <p key={i} className={i > 0 ? "mt-3" : ""}>
+                                        {p}
+                                    </p>
+                                ))}
                             </div>
-                        </motion.div>
+
+                            <button
+                                onClick={() => setShowMore(!showMore)}
+                                className="flex items-center gap-1 mt-4 text-sm font-bold font-serif transition-colors"
+                                style={{ color: "hsl(var(--bio-card-foreground))" }}
+                            >
+                                {showMore ? "Show Less" : "Show More"}
+                                {showMore ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                            </button>
+
+                            {/* Divider */}
+                            <div
+                                className="w-full h-px mt-8"
+                                style={{ backgroundColor: "hsl(var(--bio-card-divider))" }}
+                            />
+
+                            {/* My Sweet Spot Section */}
+                            <div className="mt-8">
+                                <h3
+                                    className="text-xl md:text-2xl font-bold font-serif mb-4"
+                                    style={{ color: "hsl(var(--bio-card-foreground))" }}
+                                >
+                                    {bioConfig.story?.sweetSpotTitle || "My sweet spot?"}
+                                </h3>
+                                <p
+                                    className="text-sm md:text-base font-serif leading-relaxed"
+                                    style={{ color: "hsl(var(--bio-card-muted))" }}
+                                >
+                                    {bioConfig.story?.sweetSpotText ||
+                                        "It's the intersection of behavioral psychology, sharp creative, and ruthless data analysis. If you have a business problem, I'm the person who finds the marketing solution that actually moves the needle."}
+                                </p>
+                            </div>
+                        </div>
                     </motion.div>
                 </div>
             </div>

@@ -3,7 +3,7 @@ import type { BioData } from '@/types/bio-types';
 export const bioConfig: BioData = {
     profile: {
         name: "SAGOGA",
-        tagline: "Feel free to get in touch with me!",
+        tagline: "Converting Business Goals into Measurable Marketing Success.",
         avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=600&fit=crop&crop=face",
         heroImage: "https://images.unsplash.com/photo-1556306535-0f09a537f0a3?w=1200&h=600&fit=crop",
         socialLinks: [

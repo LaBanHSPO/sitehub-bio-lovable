@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone, Menu, X } from "lucide-react";
 import { bioConfig } from "@/config/bio-config";
+import avatarImg from "@/assets/avatar.png";
 
 const NextLinkBioPage: React.FC = () => {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -12,7 +13,7 @@ const NextLinkBioPage: React.FC = () => {
             <div
                 className="fixed inset-0 bg-cover bg-center"
                 style={{
-                    backgroundImage: `url(${bioConfig.profile.avatar})`,
+                    backgroundImage: `url(${avatarImg})`,
                     filter: "blur(30px) brightness(0.4)",
                     transform: "scale(1.1)",
                 }}
@@ -31,7 +32,7 @@ const NextLinkBioPage: React.FC = () => {
                         <div className="flex items-center justify-between px-5 py-4">
                             <div className="flex items-center gap-3">
                                 <img
-                                    src={bioConfig.profile.avatar}
+                                    src={avatarImg}
                                     alt={bioConfig.profile.name}
                                     className="w-10 h-10 rounded-full object-cover"
                                 />
@@ -54,7 +55,7 @@ const NextLinkBioPage: React.FC = () => {
                         <div className="px-4">
                             <div className="rounded-xl overflow-hidden">
                                 <img
-                                    src={bioConfig.profile.avatar}
+                                    src={avatarImg}
                                     alt={bioConfig.profile.name}
                                     className="w-full aspect-[4/3] object-cover"
                                 />

@@ -19,15 +19,18 @@ const TeamSection: React.FC<TeamSectionProps> = ({ team }) => {
                         transition={{ delay: i * 0.15 }}
                         className="text-center"
                     >
-                        <div className="w-20 h-20 md:w-24 md:h-24 mx-auto rounded-full overflow-hidden mb-2 border-2 border-accent/20">
+                        <div
+                            className="w-20 h-20 md:w-24 md:h-24 mx-auto rounded-full overflow-hidden mb-2 border-2"
+                            style={{ borderColor: "hsl(var(--bio-card-divider))" }}
+                        >
                             <img
                                 src={member.image}
                                 alt={member.name}
                                 className="w-full h-full object-cover"
                             />
                         </div>
-                        <p className="text-accent/60 text-xs font-serif">{member.role}</p>
-                        <h4 className="text-accent text-sm font-serif font-semibold mt-0.5">{member.name}</h4>
+                        <p className="text-xs font-serif" style={{ color: "hsl(var(--bio-card-muted))" }}>{member.role}</p>
+                        <h4 className="text-sm font-serif font-semibold mt-0.5" style={{ color: "hsl(var(--bio-card-foreground))" }}>{member.name}</h4>
                     </motion.div>
                 ))}
             </div>

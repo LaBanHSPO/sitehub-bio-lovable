@@ -16,16 +16,17 @@ const ContactInfoSection: React.FC<ContactInfoSectionProps> = ({ contactInfo }) 
             className="mt-10 space-y-4"
         >
             {/* Divider */}
-            <div className="w-full h-px bg-accent/20" />
+            <div className="w-full h-px" style={{ backgroundColor: "hsl(var(--bio-card-divider))" }} />
 
             {/* Email */}
             <div className="flex items-start gap-3">
-                <Mail className="w-4 h-4 text-accent/60 mt-0.5 flex-shrink-0" />
+                <Mail className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: "hsl(var(--bio-card-muted))" }} />
                 <div>
-                    <p className="text-accent/50 text-xs font-serif">Email</p>
+                    <p className="text-xs font-serif" style={{ color: "hsl(var(--bio-card-muted) / 0.7)" }}>Email</p>
                     <a
                         href={`mailto:${contactInfo.email}`}
-                        className="text-accent text-sm font-serif hover:underline"
+                        className="text-sm font-serif hover:underline"
+                        style={{ color: "hsl(var(--bio-card-foreground))" }}
                     >
                         {contactInfo.email}
                     </a>
@@ -34,12 +35,13 @@ const ContactInfoSection: React.FC<ContactInfoSectionProps> = ({ contactInfo }) 
 
             {/* Phone */}
             <div className="flex items-start gap-3">
-                <Phone className="w-4 h-4 text-accent/60 mt-0.5 flex-shrink-0" />
+                <Phone className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: "hsl(var(--bio-card-muted))" }} />
                 <div>
-                    <p className="text-accent/50 text-xs font-serif">Phone</p>
+                    <p className="text-xs font-serif" style={{ color: "hsl(var(--bio-card-muted) / 0.7)" }}>Phone</p>
                     <a
                         href={`tel:${contactInfo.phone}`}
-                        className="text-accent text-sm font-serif hover:underline"
+                        className="text-sm font-serif hover:underline"
+                        style={{ color: "hsl(var(--bio-card-foreground))" }}
                     >
                         {contactInfo.phone}
                     </a>
@@ -48,21 +50,24 @@ const ContactInfoSection: React.FC<ContactInfoSectionProps> = ({ contactInfo }) 
 
             {/* Location */}
             <div className="flex items-start gap-3">
-                <MapPin className="w-4 h-4 text-accent/60 mt-0.5 flex-shrink-0" />
+                <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: "hsl(var(--bio-card-muted))" }} />
                 <div>
-                    <p className="text-accent/50 text-xs font-serif">Location</p>
-                    <p className="text-accent text-sm font-serif">{contactInfo.location}</p>
+                    <p className="text-xs font-serif" style={{ color: "hsl(var(--bio-card-muted) / 0.7)" }}>Location</p>
+                    <p className="text-sm font-serif" style={{ color: "hsl(var(--bio-card-foreground))" }}>{contactInfo.location}</p>
                 </div>
             </div>
 
             {/* Save as Contact */}
-            <button className="flex items-center gap-2 text-accent/70 hover:text-accent transition-colors text-sm font-serif mt-2">
+            <button
+                className="flex items-center gap-2 transition-colors text-sm font-serif mt-2"
+                style={{ color: "hsl(var(--bio-card-muted))" }}
+            >
                 <UserPlus className="w-4 h-4" />
                 Save as Contact
             </button>
 
             {/* Divider */}
-            <div className="w-full h-px bg-accent/20" />
+            <div className="w-full h-px" style={{ backgroundColor: "hsl(var(--bio-card-divider))" }} />
         </motion.div>
     );
 };

@@ -20,7 +20,7 @@ const InstagramFeedSection: React.FC<InstagramFeedSectionProps> = ({ feed }) => 
             <div className="flex justify-center mb-6">
                 <Button
                     asChild
-                    className="bg-primary text-primary-foreground border-0 rounded-full px-6 text-sm font-serif"
+                    className="rounded-full px-6 text-sm font-serif"
                 >
                     <a
                         href={`https://www.instagram.com/${feed.handle}`}
@@ -43,8 +43,8 @@ const InstagramFeedSection: React.FC<InstagramFeedSectionProps> = ({ feed }) => 
                     />
                 </div>
                 <div>
-                    <h4 className="text-accent text-sm font-serif font-bold">{feed.handle}</h4>
-                    <p className="text-accent/60 text-xs font-serif">
+                    <h4 className="text-sm font-serif font-bold" style={{ color: "hsl(var(--bio-card-foreground))" }}>{feed.handle}</h4>
+                    <p className="text-xs font-serif" style={{ color: "hsl(var(--bio-card-muted))" }}>
                         {feed.followers} · {feed.posts}
                     </p>
                 </div>

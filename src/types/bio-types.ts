@@ -43,9 +43,11 @@ export const testimonialSchema = z.object({
 
 // Contact Info Schema
 export const contactInfoSchema = z.object({
-    email: z.string(),
-    phone: z.string(),
-    location: z.string(),
+    contactName: z.string().optional(),
+    role: z.string().optional(),
+    email: z.string().optional(),
+    phone: z.string().optional(),
+    location: z.string().optional(),
 });
 
 // Instagram Feed Schema

@@ -3,8 +3,8 @@ import type { BioData } from '@/types/bio-types';
 export const bioConfig: BioData = {
     profile: {
         name: "SAGOGA",
-        tagline: "Find Balance & Peace Through Alternative Therapy",
-        avatar: "https://images.unsplash.com/photo-1577495508326-19a1b3cf65b7?w=400&h=400&fit=crop",
+        tagline: "Feel free to get in touch with me!",
+        avatar: "",
         socialLinks: [
             { name: "Phone", url: "tel:+1666444555", icon: "Phone" },
             { name: "Facebook", url: "https://facebook.com", icon: "Facebook" },

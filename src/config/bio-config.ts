@@ -4,7 +4,7 @@ export const bioConfig: BioData = {
     profile: {
         name: "SAGOGA",
         tagline: "Feel free to get in touch with me!",
-        avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&h=600&fit=crop",
+        avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=600&fit=crop&crop=face",
         socialLinks: [
             { name: "Phone", url: "tel:+1666444555", icon: "Phone" },
             { name: "Facebook", url: "https://facebook.com", icon: "Facebook" },

@@ -1,10 +1,20 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone, Menu, X } from "lucide-react";
+import { QRCodeSVG } from "qrcode.react";
 import { bioConfig } from "@/config/bio-config";
 
 const NextLinkBioPage: React.FC = () => {
     const [menuOpen, setMenuOpen] = useState(false);
+
+    const vCard = `BEGIN:VCARD
+VERSION:3.0
+FN:${bioConfig.contactInfo?.contactName || "Alex Johnson"}
+TITLE:${bioConfig.contactInfo?.role || ""}
+TEL:${bioConfig.contactInfo?.phone || ""}
+EMAIL:${bioConfig.contactInfo?.email || ""}
+ADR:;;${bioConfig.contactInfo?.location || ""}
+END:VCARD`;
 
     return (
         <div className="min-h-screen relative">
@@ -126,7 +136,7 @@ const NextLinkBioPage: React.FC = () => {
                         </div>
 
                         {/* CTA Buttons */}
-                        <div className="px-6 pt-8 pb-8 space-y-3">
+                        <div className="px-6 pt-8 space-y-3">
                             <button
                                 className="w-full py-4 rounded-full text-base font-bold font-serif transition-colors"
                                 style={{
@@ -146,6 +156,31 @@ const NextLinkBioPage: React.FC = () => {
                                 Contact Me
                             </button>
                         </div>
+
+                        {/* QR Code */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 10 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            className="px-6 pt-6 pb-8 flex flex-col items-center gap-3"
+                        >
+                            <div className="w-full h-px" style={{ backgroundColor: "hsl(var(--bio-card-divider))" }} />
+                            <p
+                                className="text-sm font-serif mt-3"
+                                style={{ color: "hsl(var(--bio-card-muted))" }}
+                            >
+                                Scan to save contact
+                            </p>
+                            <div className="bg-white p-3 rounded-xl">
+                                <QRCodeSVG
+                                    value={vCard}
+                                    size={160}
+                                    level="M"
+                                    bgColor="#ffffff"
+                                    fgColor="#2d1f14"
+                                />
+                            </div>
+                        </motion.div>
                     </motion.div>
                 </div>
             </div>

@@ -28,7 +28,8 @@ const ServicesCarousel: React.FC<ServicesCarouselProps> = ({ services, subtitle 
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
-                    className="text-accent/80 text-sm md:text-base font-serif text-center mb-2"
+                    className="text-sm md:text-base font-serif text-center mb-2"
+                    style={{ color: "hsl(var(--bio-card-muted))" }}
                 >
                     {subtitle}
                 </motion.p>
@@ -38,7 +39,11 @@ const ServicesCarousel: React.FC<ServicesCarouselProps> = ({ services, subtitle 
                 {/* Left Arrow */}
                 <button
                     onClick={() => scroll("left")}
-                    className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-background/20 backdrop-blur-sm flex items-center justify-center text-accent/70 hover:text-accent hover:bg-background/30 transition-all"
+                    className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full flex items-center justify-center transition-all"
+                    style={{
+                        backgroundColor: "hsl(var(--bio-card-divider) / 0.5)",
+                        color: "hsl(var(--bio-card-foreground))",
+                    }}
                 >
                     <ChevronLeft className="w-4 h-4" />
                 </button>
@@ -46,7 +51,7 @@ const ServicesCarousel: React.FC<ServicesCarouselProps> = ({ services, subtitle 
                 {/* Carousel */}
                 <div
                     ref={scrollRef}
-                    className="flex gap-4 overflow-x-auto scrollbar-hide px-8 py-2 snap-x snap-mandatory"
+                    className="flex gap-4 overflow-x-auto px-8 py-2 snap-x snap-mandatory"
                     style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
                 >
                     {services.map((service) => (
@@ -78,7 +83,11 @@ const ServicesCarousel: React.FC<ServicesCarouselProps> = ({ services, subtitle 
                 {/* Right Arrow */}
                 <button
                     onClick={() => scroll("right")}
-                    className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-background/20 backdrop-blur-sm flex items-center justify-center text-accent/70 hover:text-accent hover:bg-background/30 transition-all"
+                    className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full flex items-center justify-center transition-all"
+                    style={{
+                        backgroundColor: "hsl(var(--bio-card-divider) / 0.5)",
+                        color: "hsl(var(--bio-card-foreground))",
+                    }}
                 >
                     <ChevronRight className="w-4 h-4" />
                 </button>

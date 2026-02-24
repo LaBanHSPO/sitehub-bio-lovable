@@ -17,7 +17,7 @@ const NextLinkBioPage: React.FC = () => {
                 className="fixed inset-0 bg-cover bg-center"
                 style={{
                     backgroundImage: `url(${bioConfig.profile.avatar})`,
-                    filter: "blur(30px) brightness(0.5)",
+                    filter: "blur(30px) brightness(0.4)",
                     transform: "scale(1.1)",
                 }}
             />
@@ -25,12 +25,12 @@ const NextLinkBioPage: React.FC = () => {
             {/* Card container */}
             <div className="relative z-10 flex justify-center px-4 py-8 min-h-screen">
                 <div className="w-full max-w-lg">
-                    {/* Main dark card */}
+                    {/* Main dark brown card */}
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6 }}
-                        className="bg-secondary rounded-2xl px-6 py-10 shadow-2xl"
+                        className="bio-card rounded-2xl px-6 py-10 shadow-2xl"
                     >
                         {/* Header: name, tagline, social, avatar */}
                         <BioHeader profile={bioConfig.profile} />
@@ -40,7 +40,8 @@ const NextLinkBioPage: React.FC = () => {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.6 }}
-                            className="text-center text-accent/80 font-serif italic text-base mt-8"
+                            className="text-center font-serif italic text-base mt-8"
+                            style={{ color: "hsl(var(--bio-card-foreground))" }}
                         >
                             Happiness is here and now
                         </motion.p>
@@ -50,7 +51,8 @@ const NextLinkBioPage: React.FC = () => {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.7 }}
-                            className="text-center text-accent/60 font-serif text-sm mt-2 mb-2"
+                            className="text-center font-serif text-sm mt-2 mb-2"
+                            style={{ color: "hsl(var(--bio-card-muted))" }}
                         >
                             We Believe in the Power of a Holistic Approach to Health and Wellness.
                         </motion.p>
@@ -104,7 +106,7 @@ const NextLinkBioPage: React.FC = () => {
                         )}
 
                         {/* Footer */}
-                        <p className="text-accent/30 text-xs text-center mt-10 font-serif">
+                        <p className="text-xs text-center mt-10 font-serif" style={{ color: "hsl(var(--bio-card-muted) / 0.5)" }}>
                             By submitting your contact details, you are providing your data to {bioConfig.profile.name}, who may contact you for marketing purposes.
                         </p>
                     </motion.div>

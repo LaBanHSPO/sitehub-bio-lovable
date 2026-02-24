@@ -11,7 +11,10 @@ const TestimonialCard: React.FC<{ testimonial: Testimonial }> = ({ testimonial }
     const [expanded, setExpanded] = useState(false);
 
     return (
-        <div className="bg-background/5 rounded-xl p-4">
+        <div
+            className="rounded-xl p-4"
+            style={{ backgroundColor: "hsl(var(--bio-card-divider) / 0.3)" }}
+        >
             {/* Header */}
             <div className="flex items-center gap-3 mb-3">
                 <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
@@ -22,8 +25,8 @@ const TestimonialCard: React.FC<{ testimonial: Testimonial }> = ({ testimonial }
                     />
                 </div>
                 <div>
-                    <h4 className="text-accent text-sm font-serif font-semibold">{testimonial.name}</h4>
-                    <p className="text-accent/70 text-xs font-serif italic">"{testimonial.title}"</p>
+                    <h4 className="text-sm font-serif font-semibold" style={{ color: "hsl(var(--bio-card-foreground))" }}>{testimonial.name}</h4>
+                    <p className="text-xs font-serif italic" style={{ color: "hsl(var(--bio-card-muted))" }}>"{testimonial.title}"</p>
                 </div>
             </div>
 
@@ -34,7 +37,8 @@ const TestimonialCard: React.FC<{ testimonial: Testimonial }> = ({ testimonial }
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="text-accent/70 text-xs font-serif leading-relaxed mb-3 overflow-hidden"
+                        className="text-xs font-serif leading-relaxed mb-3 overflow-hidden"
+                        style={{ color: "hsl(var(--bio-card-muted))" }}
                     >
                         {testimonial.content}
                     </motion.p>
@@ -51,7 +55,8 @@ const TestimonialCard: React.FC<{ testimonial: Testimonial }> = ({ testimonial }
             {/* Show More/Less */}
             <button
                 onClick={() => setExpanded(!expanded)}
-                className="flex items-center gap-1 text-accent/50 text-xs font-serif hover:text-accent transition-colors"
+                className="flex items-center gap-1 text-xs font-serif transition-colors"
+                style={{ color: "hsl(var(--bio-card-muted) / 0.7)" }}
             >
                 {expanded ? (
                     <>Show Less <ChevronUp className="w-3 h-3" /></>

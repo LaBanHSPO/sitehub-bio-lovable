@@ -1,50 +1,115 @@
 import React from "react";
-import HeroSection from "@/components/sections/HeroSection";
-import AboutSection from "@/components/sections/AboutSection";
-import GallerySection from "@/components/sections/GallerySection";
-import BrandPartnershipsSection from "@/components/sections/BrandPartnershipsSection";
-import VideoSection from "@/components/sections/VideoSection";
-import ContactSection from "@/components/sections/ContactSection";
-import FooterSection from "@/components/sections/FooterSection";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
 import { bioConfig } from "@/config/bio-config";
+import BioHeader from "@/components/sections/BioHeader";
+import ServicesCarousel from "@/components/sections/ServicesCarousel";
+import TeamSection from "@/components/sections/TeamSection";
+import ContactInfoSection from "@/components/sections/ContactInfoSection";
+import TestimonialsSection from "@/components/sections/TestimonialsSection";
+import InstagramFeedSection from "@/components/sections/InstagramFeedSection";
 
-interface NextLinkBioPageProps {
-    productId?: string;
-}
-
-const NextLinkBioPage: React.FC<NextLinkBioPageProps> = () => {
+const NextLinkBioPage: React.FC = () => {
     return (
-        <div className="min-h-screen bg-background">
-            {/* 1. Full-screen Hero */}
-            <HeroSection profile={bioConfig.profile} />
+        <div className="min-h-screen relative">
+            {/* Background image - blurred and full */}
+            <div
+                className="fixed inset-0 bg-cover bg-center"
+                style={{
+                    backgroundImage: `url(${bioConfig.profile.avatar})`,
+                    filter: "blur(30px) brightness(0.5)",
+                    transform: "scale(1.1)",
+                }}
+            />
 
-            {/* 2. About Section */}
-            {bioConfig.about && (
-                <AboutSection about={bioConfig.about} />
-            )}
+            {/* Card container */}
+            <div className="relative z-10 flex justify-center px-4 py-8 min-h-screen">
+                <div className="w-full max-w-lg">
+                    {/* Main dark card */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6 }}
+                        className="bg-secondary rounded-2xl px-6 py-10 shadow-2xl"
+                    >
+                        {/* Header: name, tagline, social, avatar */}
+                        <BioHeader profile={bioConfig.profile} />
 
-            {/* 3. Gallery Section */}
-            {bioConfig.gallery && (
-                <GallerySection gallery={bioConfig.gallery} />
-            )}
+                        {/* Happiness tagline */}
+                        <motion.p
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: 0.6 }}
+                            className="text-center text-accent/80 font-serif italic text-base mt-8"
+                        >
+                            Happiness is here and now
+                        </motion.p>
 
-            {/* 4. Brand Partnerships */}
-            {bioConfig.brandPartnerships && (
-                <BrandPartnershipsSection data={bioConfig.brandPartnerships} />
-            )}
+                        {/* Description */}
+                        <motion.p
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: 0.7 }}
+                            className="text-center text-accent/60 font-serif text-sm mt-2 mb-2"
+                        >
+                            We Believe in the Power of a Holistic Approach to Health and Wellness.
+                        </motion.p>
 
-            {/* 5. Video Section */}
-            {bioConfig.video && (
-                <VideoSection video={bioConfig.video} />
-            )}
+                        {/* Services Carousel */}
+                        {bioConfig.services && bioConfig.services.length > 0 && (
+                            <ServicesCarousel services={bioConfig.services} />
+                        )}
 
-            {/* 6. Contact / CTA */}
-            {bioConfig.contact && (
-                <ContactSection contact={bioConfig.contact} />
-            )}
+                        {/* CTA Button */}
+                        {bioConfig.ctaButton && (
+                            <motion.div
+                                initial={{ opacity: 0, y: 10 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                className="mt-8 flex justify-center"
+                            >
+                                <Button
+                                    asChild
+                                    className="w-full rounded-full py-6 text-base font-serif"
+                                >
+                                    <a
+                                        href={bioConfig.ctaButton.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        {bioConfig.ctaButton.label}
+                                    </a>
+                                </Button>
+                            </motion.div>
+                        )}
 
-            {/* 7. Footer */}
-            <FooterSection socialLinks={bioConfig.profile.socialLinks} />
+                        {/* Team Section */}
+                        {bioConfig.team && bioConfig.team.length > 0 && (
+                            <TeamSection team={bioConfig.team} />
+                        )}
+
+                        {/* Contact Info */}
+                        {bioConfig.contactInfo && (
+                            <ContactInfoSection contactInfo={bioConfig.contactInfo} />
+                        )}
+
+                        {/* Testimonials */}
+                        {bioConfig.testimonials && bioConfig.testimonials.length > 0 && (
+                            <TestimonialsSection testimonials={bioConfig.testimonials} />
+                        )}
+
+                        {/* Instagram Feed */}
+                        {bioConfig.instagramFeed && (
+                            <InstagramFeedSection feed={bioConfig.instagramFeed} />
+                        )}
+
+                        {/* Footer */}
+                        <p className="text-accent/30 text-xs text-center mt-10 font-serif">
+                            By submitting your contact details, you are providing your data to {bioConfig.profile.name}, who may contact you for marketing purposes.
+                        </p>
+                    </motion.div>
+                </div>
+            </div>
         </div>
     );
 };

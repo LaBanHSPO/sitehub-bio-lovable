@@ -12,8 +12,18 @@ export const profileSchema = z.object({
     name: z.string().min(1),
     tagline: z.string().min(1),
     avatar: z.string().min(1),
+    heroImage: z.string().optional(),
     coverImage: z.string().url().optional(),
     socialLinks: z.array(socialLinkSchema),
+});
+
+// Story Schema
+export const storySchema = z.object({
+    title: z.string().optional(),
+    subtitle: z.string().optional(),
+    paragraphs: z.array(z.string()).optional(),
+    sweetSpotTitle: z.string().optional(),
+    sweetSpotText: z.string().optional(),
 });
 
 // Service Schema
@@ -107,6 +117,7 @@ export const settingsSchema = z.object({
 // Complete Bio Data Schema
 export const bioDataSchema = z.object({
     profile: profileSchema,
+    story: storySchema.optional(),
     services: z.array(serviceSchema).optional(),
     ctaButton: ctaButtonSchema.optional(),
     team: z.array(teamMemberSchema).optional(),

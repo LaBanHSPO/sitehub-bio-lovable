@@ -1,18 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
+import { Mail, Phone, Menu, X } from "lucide-react";
 import { bioConfig } from "@/config/bio-config";
-import BioHeader from "@/components/sections/BioHeader";
-import ServicesCarousel from "@/components/sections/ServicesCarousel";
-import TeamSection from "@/components/sections/TeamSection";
-import ContactInfoSection from "@/components/sections/ContactInfoSection";
-import TestimonialsSection from "@/components/sections/TestimonialsSection";
-import InstagramFeedSection from "@/components/sections/InstagramFeedSection";
 
 const NextLinkBioPage: React.FC = () => {
+    const [menuOpen, setMenuOpen] = useState(false);
+
     return (
         <div className="min-h-screen relative">
-            {/* Background image - blurred and full */}
+            {/* Background */}
             <div
                 className="fixed inset-0 bg-cover bg-center"
                 style={{
@@ -25,90 +21,131 @@ const NextLinkBioPage: React.FC = () => {
             {/* Card container */}
             <div className="relative z-10 flex justify-center px-4 py-8 min-h-screen">
                 <div className="w-full max-w-lg">
-                    {/* Main dark brown card */}
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6 }}
-                        className="bio-card rounded-2xl px-6 py-10 shadow-2xl"
+                        className="bio-card rounded-2xl shadow-2xl overflow-hidden"
                     >
-                        {/* Header: name, tagline, social, avatar */}
-                        <BioHeader profile={bioConfig.profile} />
-
-                        {/* Happiness tagline */}
-                        <motion.p
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 0.6 }}
-                            className="text-center font-serif italic text-base mt-8"
-                            style={{ color: "hsl(var(--bio-card-foreground))" }}
-                        >
-                            Happiness is here and now
-                        </motion.p>
-
-                        {/* Description */}
-                        <motion.p
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 0.7 }}
-                            className="text-center font-serif text-sm mt-2 mb-2"
-                            style={{ color: "hsl(var(--bio-card-muted))" }}
-                        >
-                            We Believe in the Power of a Holistic Approach to Health and Wellness.
-                        </motion.p>
-
-                        {/* Services Carousel */}
-                        {bioConfig.services && bioConfig.services.length > 0 && (
-                            <ServicesCarousel services={bioConfig.services} />
-                        )}
-
-                        {/* CTA Button */}
-                        {bioConfig.ctaButton && (
-                            <motion.div
-                                initial={{ opacity: 0, y: 10 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                className="mt-8 flex justify-center"
-                            >
-                                <Button
-                                    asChild
-                                    className="w-full rounded-full py-6 text-base font-serif"
+                        {/* Top Navbar */}
+                        <div className="flex items-center justify-between px-5 py-4">
+                            <div className="flex items-center gap-3">
+                                <img
+                                    src={bioConfig.profile.avatar}
+                                    alt={bioConfig.profile.name}
+                                    className="w-10 h-10 rounded-full object-cover"
+                                />
+                                <span
+                                    className="text-lg font-bold tracking-widest font-serif"
+                                    style={{ color: "hsl(var(--bio-card-foreground))" }}
                                 >
-                                    <a
-                                        href={bioConfig.ctaButton.url}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
-                                        {bioConfig.ctaButton.label}
-                                    </a>
-                                </Button>
-                            </motion.div>
-                        )}
+                                    {bioConfig.profile.name}
+                                </span>
+                            </div>
+                            <button
+                                onClick={() => setMenuOpen(!menuOpen)}
+                                style={{ color: "hsl(var(--bio-card-foreground))" }}
+                            >
+                                {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                            </button>
+                        </div>
 
-                        {/* Team Section */}
-                        {bioConfig.team && bioConfig.team.length > 0 && (
-                            <TeamSection team={bioConfig.team} />
-                        )}
+                        {/* Hero Photo */}
+                        <div className="px-4">
+                            <div className="rounded-xl overflow-hidden">
+                                <img
+                                    src={bioConfig.profile.avatar}
+                                    alt={bioConfig.profile.name}
+                                    className="w-full aspect-[4/3] object-cover"
+                                />
+                            </div>
+                        </div>
+
+                        {/* Name & Role */}
+                        <div className="text-center px-6 pt-6 pb-2">
+                            <h1
+                                className="text-2xl font-bold font-serif"
+                                style={{ color: "hsl(var(--bio-card-foreground))" }}
+                            >
+                                {bioConfig.contactInfo?.contactName || "Alex Johnson"}
+                            </h1>
+                            <p
+                                className="text-sm mt-1 font-serif"
+                                style={{ color: "hsl(var(--bio-card-muted))" }}
+                            >
+                                {bioConfig.contactInfo?.role || "CEO at Hopp"}
+                            </p>
+                            <p
+                                className="text-base mt-3 font-serif italic"
+                                style={{ color: "hsl(var(--bio-card-foreground))" }}
+                            >
+                                {bioConfig.profile.tagline}
+                            </p>
+                        </div>
+
+                        {/* Divider */}
+                        <div className="px-6 py-4">
+                            <div className="w-full h-px" style={{ backgroundColor: "hsl(var(--bio-card-divider))" }} />
+                        </div>
 
                         {/* Contact Info */}
-                        {bioConfig.contactInfo && (
-                            <ContactInfoSection contactInfo={bioConfig.contactInfo} />
-                        )}
+                        <div className="px-6 space-y-5">
+                            {/* Work Email */}
+                            <div className="flex items-start gap-4">
+                                <Mail className="w-5 h-5 mt-1 flex-shrink-0" style={{ color: "hsl(var(--bio-card-muted))" }} />
+                                <div>
+                                    <p className="text-sm font-bold font-serif" style={{ color: "hsl(var(--bio-card-foreground))" }}>
+                                        Work Email
+                                    </p>
+                                    <a
+                                        href={`mailto:${bioConfig.contactInfo?.email}`}
+                                        className="text-sm font-serif"
+                                        style={{ color: "hsl(var(--bio-card-muted))" }}
+                                    >
+                                        {bioConfig.contactInfo?.email}
+                                    </a>
+                                </div>
+                            </div>
 
-                        {/* Testimonials */}
-                        {bioConfig.testimonials && bioConfig.testimonials.length > 0 && (
-                            <TestimonialsSection testimonials={bioConfig.testimonials} />
-                        )}
+                            {/* Phone */}
+                            <div className="flex items-start gap-4">
+                                <Phone className="w-5 h-5 mt-1 flex-shrink-0" style={{ color: "hsl(var(--bio-card-muted))" }} />
+                                <div>
+                                    <p className="text-sm font-bold font-serif" style={{ color: "hsl(var(--bio-card-foreground))" }}>
+                                        Phone
+                                    </p>
+                                    <a
+                                        href={`tel:${bioConfig.contactInfo?.phone}`}
+                                        className="text-sm font-serif"
+                                        style={{ color: "hsl(var(--bio-card-muted))" }}
+                                    >
+                                        {bioConfig.contactInfo?.phone}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
 
-                        {/* Instagram Feed */}
-                        {bioConfig.instagramFeed && (
-                            <InstagramFeedSection feed={bioConfig.instagramFeed} />
-                        )}
-
-                        {/* Footer */}
-                        <p className="text-xs text-center mt-10 font-serif" style={{ color: "hsl(var(--bio-card-muted) / 0.5)" }}>
-                            By submitting your contact details, you are providing your data to {bioConfig.profile.name}, who may contact you for marketing purposes.
-                        </p>
+                        {/* CTA Buttons */}
+                        <div className="px-6 pt-8 pb-8 space-y-3">
+                            <button
+                                className="w-full py-4 rounded-full text-base font-bold font-serif transition-colors"
+                                style={{
+                                    backgroundColor: "hsl(var(--bio-card-foreground))",
+                                    color: "hsl(var(--bio-card))",
+                                }}
+                            >
+                                Save as contact
+                            </button>
+                            <button
+                                className="w-full py-4 rounded-full text-base font-bold font-serif transition-colors"
+                                style={{
+                                    backgroundColor: "hsl(var(--bio-card-foreground))",
+                                    color: "hsl(var(--bio-card))",
+                                }}
+                            >
+                                Contact Me
+                            </button>
+                        </div>
                     </motion.div>
                 </div>
             </div>

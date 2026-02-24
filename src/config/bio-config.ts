@@ -27,8 +27,10 @@ export const bioConfig: BioData = {
         { id: 3, name: "Dr. Anya Teal", role: "Founder & Lead Therapist", image: "https://images.unsplash.com/photo-1594824476967-48c8b964f90c?w=300&h=300&fit=crop" },
     ],
     contactInfo: {
-        email: "info@mysite.com",
-        phone: "666-444-555",
+        contactName: "Alex Johnson",
+        role: "CEO at Hopp",
+        email: "my-email@gmail.com",
+        phone: "+9870123456",
         location: "500 Terry Francine St, San Francisco",
     },
     testimonials: [

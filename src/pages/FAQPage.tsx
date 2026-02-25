@@ -12,23 +12,33 @@ import {
 const faqItems = [
     {
         question: "What is your home selling process?",
-        answer:
-            "Our process begins with a detailed consultation to understand your goals, followed by a comprehensive market analysis. We then create a tailored marketing plan, manage showings, negotiate offers, and guide you through closing.",
+        answer: (
+            <ul className="list-disc list-outside pl-5 space-y-2">
+                <li><strong>Initial Consultation:</strong> We begin with a free, no-obligation meeting to discuss your goals, timeline, and current market conditions.</li>
+                <li><strong>Pricing Strategy:</strong> We perform a Comparative Market Analysis (CMA) to determine the optimal listing price.</li>
+                <li><strong>Preparation:</strong> We advise on staging, minor repairs, and professional photography/video.</li>
+                <li><strong>Listing &amp; Marketing:</strong> Your home is listed on the MLS, Zillow and aggressively marketed across social media and targeted campaigns.</li>
+                <li><strong>Negotiation &amp; Closing:</strong> We manage all showings, negotiate offers, and guide you through inspections and closing paperwork.</li>
+            </ul>
+        ),
     },
     {
         question: "How do you determine my home's list price?",
-        answer:
-            "We use a combination of comparative market analysis (CMA), current market trends, your home's unique features, and our deep knowledge of the local market to recommend the optimal listing price.",
+        answer: (
+            <p>We use a combination of comparative market analysis (CMA), current market trends, your home's unique features, and our deep knowledge of the local market to recommend the optimal listing price.</p>
+        ),
     },
     {
         question: "How long does it take to sell a house?",
-        answer:
-            "The timeline varies based on market conditions, pricing, and property type. On average, well-priced homes in our market sell within 30-60 days, but we've closed deals in as little as a week.",
+        answer: (
+            <p>The timeline varies based on market conditions, pricing, and property type. On average, well-priced homes in our market sell within 30-60 days, but we've closed deals in as little as a week.</p>
+        ),
     },
     {
         question: "Do I need to make repairs before selling?",
-        answer:
-            "Not always. We'll do a walkthrough and recommend only the repairs that will give you the best return on investment. Sometimes minor cosmetic updates can significantly boost your sale price.",
+        answer: (
+            <p>Not always. We'll do a walkthrough and recommend only the repairs that will give you the best return on investment. Sometimes minor cosmetic updates can significantly boost your sale price.</p>
+        ),
     },
 ];
 
@@ -60,10 +70,10 @@ const FAQPage: React.FC = () => {
                         <BioNavbar />
 
                         {/* FAQ Content */}
-                        <div className="px-6 md:px-10 pt-6 pb-10">
+                        <div className="px-6 md:px-10 pt-8 pb-10">
                             {/* Title */}
                             <h1
-                                className="text-3xl md:text-5xl font-bold font-serif text-center mb-5"
+                                className="text-3xl md:text-4xl font-bold font-sans text-center mb-4"
                                 style={{ color: "hsl(var(--bio-card-foreground))" }}
                             >
                                 FAQ
@@ -71,7 +81,7 @@ const FAQPage: React.FC = () => {
 
                             {/* Subtitle */}
                             <p
-                                className="text-sm md:text-base font-serif text-center leading-relaxed mb-8"
+                                className="text-sm md:text-base font-sans text-center leading-relaxed mb-8"
                                 style={{ color: "hsl(var(--bio-card-muted))" }}
                             >
                                 Getting into the real estate market - whether buying or selling - can feel
@@ -79,24 +89,32 @@ const FAQPage: React.FC = () => {
                                 provide you with clear, straightforward answers.
                             </p>
 
+                            {/* Welcome heading */}
+                            <h2
+                                className="text-base md:text-lg font-bold font-sans text-center mb-5"
+                                style={{ color: "hsl(var(--bio-card-foreground))" }}
+                            >
+                                Welcome to the Marcus Thorne Real Estate FAQ
+                            </h2>
+
                             {/* Hero image */}
-                            <div className="mb-8">
+                            <div className="mb-6">
                                 <img
                                     src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1200&h=600&fit=crop"
                                     alt="FAQ Hero"
-                                    className="w-full aspect-[16/9] object-cover rounded-sm"
+                                    className="w-full aspect-[16/9] object-cover rounded-lg"
                                 />
                             </div>
 
-                            {/* Welcome section */}
+                            {/* Welcome section body */}
                             <h2
-                                className="text-lg md:text-xl font-bold font-serif mb-3"
+                                className="text-base md:text-lg font-bold font-sans mb-3"
                                 style={{ color: "hsl(var(--bio-card-foreground))" }}
                             >
-                                Welcome to the SAGOGA FAQ
+                                Welcome to the Marcus Thorne Real Estate FAQ
                             </h2>
                             <p
-                                className="text-sm md:text-base font-serif leading-relaxed mb-8"
+                                className="text-sm md:text-base font-sans leading-relaxed mb-8"
                                 style={{ color: "hsl(var(--bio-card-muted))" }}
                             >
                                 Buying or selling a home is one of life's biggest decisions. This page
@@ -105,27 +123,27 @@ const FAQPage: React.FC = () => {
                                 strategy to closing costs and timelines. If you can't find your answer
                                 here,{" "}
                                 <strong style={{ color: "hsl(var(--bio-card-foreground))" }}>
-                                    don't hesitate to reach out directly!
+                                    don't hesitate to reach out to Marcus Thorne directly!
                                 </strong>
                             </p>
 
                             {/* FAQ Accordion */}
-                            <Accordion type="single" collapsible className="w-full">
+                            <Accordion type="single" collapsible className="w-full space-y-0">
                                 {faqItems.map((item, index) => (
                                     <AccordionItem
                                         key={index}
                                         value={`item-${index}`}
-                                        className="border-b"
+                                        className="border-0 border-b"
                                         style={{ borderColor: "hsl(var(--bio-card-divider))" }}
                                     >
                                         <AccordionTrigger
-                                            className="py-4 font-serif font-bold text-left text-sm md:text-base hover:no-underline"
+                                            className="py-4 font-sans font-bold text-left text-sm md:text-base hover:no-underline [&[data-state=open]>svg]:rotate-180"
                                             style={{ color: "hsl(var(--bio-card-foreground))" }}
                                         >
                                             {index + 1}. {item.question}
                                         </AccordionTrigger>
                                         <AccordionContent
-                                            className="text-sm font-serif leading-relaxed pb-4"
+                                            className="text-sm font-sans leading-relaxed pb-5"
                                             style={{ color: "hsl(var(--bio-card-muted))" }}
                                         >
                                             {item.answer}

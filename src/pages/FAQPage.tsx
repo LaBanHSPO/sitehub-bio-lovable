@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Menu, ChevronDown } from "lucide-react";
 import { bioConfig } from "@/config/bio-config";
+import BioNavbar from "@/components/bio/BioNavbar";
 import {
     Accordion,
     AccordionContent,
@@ -57,25 +57,7 @@ const FAQPage: React.FC = () => {
                         className="md:rounded-2xl shadow-2xl overflow-hidden min-h-screen md:min-h-0"
                         style={{ backgroundColor: "hsl(var(--bio-card))" }}
                     >
-                        {/* Navbar */}
-                        <div className="flex items-center justify-between px-5 py-4">
-                            <div className="flex items-center gap-3">
-                                <img
-                                    src={profile.avatar}
-                                    alt={profile.name}
-                                    className="w-10 h-10 rounded-full object-cover"
-                                />
-                                <span
-                                    className="text-lg font-bold tracking-widest font-serif"
-                                    style={{ color: "hsl(var(--bio-card-foreground))" }}
-                                >
-                                    {profile.name}
-                                </span>
-                            </div>
-                            <button style={{ color: "hsl(var(--bio-card-foreground))" }}>
-                                <Menu className="w-6 h-6" />
-                            </button>
-                        </div>
+                        <BioNavbar />
 
                         {/* FAQ Content */}
                         <div className="px-6 md:px-10 pt-6 pb-10">

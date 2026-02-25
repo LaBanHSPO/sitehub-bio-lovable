@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Menu } from "lucide-react";
 import { bioConfig } from "@/config/bio-config";
+import BioNavbar from "@/components/bio/BioNavbar";
 
 const NextLinkBioPage: React.FC = () => {
     const { profile, story, contactInfo } = bioConfig;
@@ -25,28 +25,10 @@ const NextLinkBioPage: React.FC = () => {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6 }}
-                        className="md:rounded-2xl shadow-2xl overflow-hidden min-h-screen md:min-h-0"
+                        className="md:rounded-2xl shadow-2xl overflow-hidden min-h-screen md:min-h-0 relative"
                         style={{ backgroundColor: "hsl(var(--bio-card))" }}
                     >
-                        {/* Navbar */}
-                        <div className="flex items-center justify-between px-5 py-4">
-                            <div className="flex items-center gap-3">
-                                <img
-                                    src={profile.avatar}
-                                    alt={profile.name}
-                                    className="w-10 h-10 rounded-full object-cover"
-                                />
-                                <span
-                                    className="text-lg font-bold tracking-widest font-serif"
-                                    style={{ color: "hsl(var(--bio-card-foreground))" }}
-                                >
-                                    {profile.name}
-                                </span>
-                            </div>
-                            <button style={{ color: "hsl(var(--bio-card-foreground))" }}>
-                                <Menu className="w-6 h-6" />
-                            </button>
-                        </div>
+                        <BioNavbar />
 
                         {/* About me title */}
                         <div className="px-6 md:px-10 pt-6 pb-4">
